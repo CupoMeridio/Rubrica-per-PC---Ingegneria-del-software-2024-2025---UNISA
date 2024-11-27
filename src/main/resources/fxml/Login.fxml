@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LoginProve.LoginController">
+    <stylesheets>
+        <URL value="@/styles/login.css" />
+    </stylesheets>
+   <children>
+      <HBox alignment="CENTER" layoutX="179.0" layoutY="150.0" prefHeight="100.0" prefWidth="200.0" spacing="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" />
+            <Button fx:id="btnSign" mnemonicParsing="false" text="Sign-in" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
