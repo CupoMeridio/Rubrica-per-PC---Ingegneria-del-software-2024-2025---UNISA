@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:id="splitPane" dividerPositions="0.1038961038961039" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginProve.RubricaController">
+  <items>
+    <AnchorPane fx:id="anchorUp" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <HBox fx:id="hboxButton" alignment="CENTER_LEFT" layoutX="1.0" layoutY="4.0" prefHeight="41.0" prefWidth="598.0" spacing="10.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+               <children>
+                  <Button fx:id="btnAdd" mnemonicParsing="false" text="Add" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="btnMod" mnemonicParsing="false" text="Modify" />
+                  <MenuButton fx:id="menuSort" mnemonicParsing="false" text="Sort">
+                    <items>
+                        <RadioMenuItem fx:id="radioMenuSur1" mnemonicParsing="false" text="By Surname A-Z" />
+                        <RadioMenuItem fx:id="radioMenuSur2" mnemonicParsing="false" text="By Sognome Z-A" />
+                        <RadioMenuItem fx:id="radioMenuName1" mnemonicParsing="false" text="By Name A-Z" />
+                        <RadioMenuItem fx:id="radioMenuName2" mnemonicParsing="false" text="By Name Z-A" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton fx:id="menuFilter" mnemonicParsing="false" text="Filter">
+                     <items>
+                        <CheckMenuItem fx:id="checkMenuHome" mnemonicParsing="false" text="Home" />
+                        <CheckMenuItem fx:id="checkMenuUni" mnemonicParsing="false" text="University" />
+                        <CheckMenuItem fx:id="checkMenuJob" mnemonicParsing="false" text="Job" />
+                     </items>
+                  </MenuButton>
+                  <Button fx:id="btnImp" mnemonicParsing="false" text="Import" />
+                  <Button fx:id="btnExp" mnemonicParsing="false" text="Export" />
+                  <TextField fx:id="txtSearch" />
+               </children>
+            </HBox>
+         </children></AnchorPane>
+    <AnchorPane fx:id="anchorBottom" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <TableView fx:id="tableView" layoutX="424.0" layoutY="188.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+              <columns>
+                <TableColumn fx:id="clmSurname" prefWidth="75.0" text="Surname" />
+                <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="clmEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="clmTel" prefWidth="75.0" text="Number" />
+                  <TableColumn fx:id="clmTag" prefWidth="75.0" text="Tag" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
