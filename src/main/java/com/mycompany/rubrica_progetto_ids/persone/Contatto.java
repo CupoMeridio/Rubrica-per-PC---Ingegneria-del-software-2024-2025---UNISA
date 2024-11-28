@@ -3,11 +3,13 @@ package com.mycompany.rubrica_progetto_ids.persone;
 public class Contatto extends Persona{
     private String[] number;
     private String[] email;
-
+    private Tag[] tag;
+    
     public Contatto(String name, String surname) {
         super(name, surname);
         number = new String[3];
         email = new String[3];
+        this.tag= new Tag[3];
     }
     
     public String[] getNumber(){
@@ -18,6 +20,12 @@ public class Contatto extends Persona{
         return email;
     }
 
+    public void addTag(Tag tag) {
+        if(this.tag.length<3)
+            this.tag[this.tag.length] = tag;
+        //gestire l' elese
+    }
+    
     public void addNumber(String number) {
         if (this.number.length>=3){
             //gestire
