@@ -3,9 +3,8 @@ left to right direction
 actor Utente as u
 actor "Utente registrato" as ur
 actor "Database" as db
-actor "Interfaccia grafica" as gui
 rectangle Rubrica{
-    usecase "Visualizza Rubrica" as vr
+    usecase "Operazione Rubrica" as vr
     usecase "Registrazione" as reg
     usecase "Login" as log
     usecase "Aggiungere contatto" as agg
@@ -24,8 +23,6 @@ u--reg
 ur--vr
 
 db--vr
-
-gui--vr
 
 ur --|>u
 
