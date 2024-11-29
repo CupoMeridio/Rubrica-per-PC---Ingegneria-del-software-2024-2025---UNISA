@@ -15,10 +15,10 @@ Questo progetto consiste nello sviluppo di un'applicazione per PC dedicata alla 
 - **Esportazione/Importazione:** Salvataggio dei contatti in formati standard (es. CSV).
 
 ## 🛠️ Tecnologie Utilizzate
-**Linguaggio di Programmazione:** Java
-**Database:** PostgreSQL
-**Framework e Librerie:** JavaFx
-**Strumenti di Versionamento:** Git/GitHub
+- **Linguaggio di Programmazione:** Java
+- **Database:** PostgreSQL
+- **Framework e Librerie:** JavaFx
+- **Strumenti di Versionamento:** Git/GitHub
 
 ## 👥 Team di Sviluppo
 Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso di Ingegneria Informatica presso l'Università degli Studi di Salerno (UNISA):
