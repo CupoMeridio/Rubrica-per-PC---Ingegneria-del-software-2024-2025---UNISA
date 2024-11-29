@@ -23,10 +23,10 @@ Questo progetto consiste nello sviluppo di un'applicazione per PC dedicata alla 
 ## 👥 Team di Sviluppo
 Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso di Ingegneria Informatica presso l'Università degli Studi di Salerno (UNISA):
 
-**Postiglione Vittorio**
-**Quaranta Valeria**
-**Sanzari Mattia**
-**Zouhri Anuar**
+- **Postiglione Vittorio**
+- **Quaranta Valeria**
+- **Sanzari Mattia**
+- **Zouhri Anuar**
 
 ## 📦 Installazione
 
