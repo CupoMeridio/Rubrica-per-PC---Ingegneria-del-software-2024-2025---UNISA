@@ -33,7 +33,7 @@ Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso 
 **Clonare il repository:**
 
 ```bash
-git clone git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
+git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 ```
 Configurare il database:
 (istruzioni per l'installazione e configurazione del database ancora da definire)
