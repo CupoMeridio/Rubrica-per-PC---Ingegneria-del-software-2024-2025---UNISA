@@ -70,8 +70,8 @@ This project consists of the development of a PC application dedicated to managi
 ## 👥 Development Team
 The project was created by Group 02, made up of 4 students from the Computer Engineering course at the University of Salerno (UNISA):
 
-- **Postillion Vittorio**
-- **Forty Valeria**
+- **Postiglione Vittorio**
+- **Quaranta Valeria**
 - **Sanzari Mattia**
 - **Zouhri Anuar**
 
