@@ -1,10 +1,11 @@
-package com.mycompany.rubrica_progetto_ids.persone;
 
-public class Utente extends Persona{
+package com.mycompany.maindb;
+
+public class User extends Person{
     private String password;
     private final String email;
 
-    public Utente(String password, String email, String name, String surname) {
+    public User(String password, String email, String name, String surname) {
         super(name, surname);
         this.password = password;
         this.email = email;
@@ -28,3 +29,4 @@ public class Utente extends Persona{
         return this.getRole()+" "+super.toString()+" Email: "+email;
     }
 }
+

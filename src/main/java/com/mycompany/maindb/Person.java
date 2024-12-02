@@ -1,10 +1,11 @@
-package com.mycompany.rubrica_progetto_ids.persone;
 
-public abstract class Persona {
+package com.mycompany.maindb;
+
+public abstract class Person {
     private String name;
     private String surname;
 
-    public Persona(String name, String surname){
+    public Person(String name, String surname){
         this.name=name;
         this.surname=surname;
     }
@@ -29,7 +30,7 @@ public abstract class Persona {
     
     @Override
     public String toString(){
-        return "Nome: "+name+" Cognome: "+surname+"\n";
+        return "Name: "+name+" Surname: "+surname+"\n";
     }
     
     public abstract String getRole();

@@ -1,11 +1,19 @@
-package com.mycompany.rubrica_progetto_ids.persone;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.maindb;
 
-public class Contatto extends Persona{
+/**
+ *
+ * @author cupom
+ */
+public class Contact extends Person{
     private String[] number;
     private String[] email;
     private Tag[] tag;
     
-    public Contatto(String name, String surname) {
+    public Contact(String name, String surname) {
         super(name, surname);
         number = new String[3];
         email = new String[3];
@@ -24,6 +32,7 @@ public class Contatto extends Persona{
         if(this.tag.length<3)
             this.tag[this.tag.length] = tag;
         //gestire l' elese
+        
     }
     
     public void addNumber(String number) {
@@ -48,9 +57,9 @@ public class Contatto extends Persona{
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
         for (int i=0; i<this.number.length;i++)
-            sb=sb.append(" Numero di telefono: "+number[i]);
+            sb=sb.append(" Phone number: ").append(number[i]);
         for (int i=0; i<this.email.length;i++)
-            sb=sb.append(" Email: "+email[i]);
+            sb=sb.append(" Email: ").append(email[i]);
         return sb.toString();
     }
     
