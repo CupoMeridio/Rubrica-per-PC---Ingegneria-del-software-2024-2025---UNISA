@@ -9,8 +9,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -95,6 +97,7 @@ public class DbFunctions {
                 esito= -1;// -1 perchè email non è presente nel db
             }else{
                 do{
+                    rs.next();// Da rivedere funziona solo perchè c'è un colo valore
                     String em=rs.getString("email");
                     String hashed = rs.getString("password");
                     System.out.print("\n"+email+"   checkLogin");
@@ -148,9 +151,36 @@ public class DbFunctions {
     }
 
     private Contact createContact(String name, String surname, String numeri, String tag, String em_cont) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Contact c= new Contact(name,surname);
+        ArrayList<String> n = new ArrayList<>();
+        ArrayList<String> e = new ArrayList<>();
+        ArrayList<Tag> t = new ArrayList<>();
+        
+        
+            Scanner i = new Scanner(tag);
+            i.useDelimiter(";");
+             while(i.hasNext()){
+                 t.add( Tag.valueOf(i.next()));
+            }
+             System.out.print(t+" \n");
+             c.setTag(t);
+             
+            i = new Scanner(numeri);
+            i.useDelimiter(";");
+            while(i.hasNext()){
+                 n.add( i.next());
+            }
+             System.out.print(n+" \n");
+             c.setNumber(e);
+            
+            i = new Scanner(em_cont);
+            i.useDelimiter(";");
+            while(i.hasNext()){
+                 e.add( i.next());
+            }
+            System.out.print(e+" \n");
+             c.setNumber(e);
+        
+        return c;
     }
-
-
- 
 }
