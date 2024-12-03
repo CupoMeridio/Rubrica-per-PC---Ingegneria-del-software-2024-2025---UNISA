@@ -14,12 +14,24 @@ public class Contact extends Person{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
+    private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
+    private final int ID;
     
     public Contact(String name, String surname) {
         super(name, surname);
         number = new ArrayList<String>();
         email = new ArrayList<String>();
         this.tag= new ArrayList<Tag>();
+        this.ID = contatore;
+         contatore++;
+        
+    }
+    public Contact(String name, String surname, int ID) {
+        super(name, surname);
+        number = new ArrayList<String>();
+        email = new ArrayList<String>();
+        this.tag= new ArrayList<Tag>();
+        this.ID = ID;  
     }
 
     public void setNumber(ArrayList<String> number) {
@@ -50,6 +62,10 @@ public class Contact extends Person{
             this.tag.set(this.tag.size(), tag);
         //gestire l' elese
         
+    }
+
+    public int getID() {
+        return ID;
     }
     
     public void addNumber(String number) {

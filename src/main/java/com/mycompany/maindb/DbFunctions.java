@@ -135,13 +135,14 @@ public class DbFunctions {
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
             while(rs.next()){
+            //  String em = rs.getString("email");
                 String name = rs.getString("name");
                 String surname= rs.getString("surname");
-                String em = rs.getString("email");
                 String numeri = rs.getString("number");
                 String tag = rs.getString("tag");
                 String em_cont = rs.getString("email_contact");
-                table.put(em, createContact(name,surname,numeri,tag,em_cont));
+                String ID = rs.getString("id");
+                table.put(ID, createContact(name,surname,numeri,tag,em_cont,ID));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DbFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,8 +151,8 @@ public class DbFunctions {
         return (HashMap<String, Contact>) table;
     }
 
-    private Contact createContact(String name, String surname, String numeri, String tag, String em_cont) {
-        Contact c= new Contact(name,surname);
+    private Contact createContact(String name, String surname, String numeri, String tag, String em_cont, String ID) {
+        Contact c= new Contact(name,surname, Integer.valueOf(ID));
         ArrayList<String> n = new ArrayList<>();
         ArrayList<String> e = new ArrayList<>();
         ArrayList<Tag> t = new ArrayList<>();
@@ -171,7 +172,7 @@ public class DbFunctions {
                  n.add( i.next());
             }
              System.out.print(n+" \n");
-             c.setNumber(e);
+             c.setNumber(n);
             
             i = new Scanner(em_cont);
             i.useDelimiter(";");
@@ -179,7 +180,7 @@ public class DbFunctions {
                  e.add( i.next());
             }
             System.out.print(e+" \n");
-             c.setNumber(e);
+             c.setEmail(e);
         
         return c;
     }
@@ -189,6 +190,7 @@ public class DbFunctions {
            Statement statment;
            String nm=cont.getName();
            String srn=cont.getSurname();
+           String ID= String.valueOf(cont.getID());
            
            ArrayList<String> e = cont.getEmail();
            ArrayList<String> n = cont.getNumber();
@@ -208,10 +210,11 @@ public class DbFunctions {
            String tag= formattaOut(St);
            
            
-           String query= String.format("insert into %s(email,name,surname,email_contact,number,tag) values('%s','%s','%s','%s','%s','%s');",tableName,  email_Utente,nm,srn,email,number,tag);
+           String query;
+        query = String.format("insert into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s');",tableName,  email_Utente,nm,srn,number,tag,email,ID);
            statment= conn.createStatement();
            statment.executeUpdate(query);
-           System.out.println("Utente inserito");
+           System.out.println("Contatto inserito");
         
     }
 
