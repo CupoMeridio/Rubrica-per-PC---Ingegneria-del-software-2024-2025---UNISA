@@ -183,4 +183,46 @@ public class DbFunctions {
         
         return c;
     }
+    
+    public void insertContatto(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+    
+           Statement statment;
+           String nm=cont.getName();
+           String srn=cont.getSurname();
+           
+           ArrayList<String> e = cont.getEmail();
+           ArrayList<String> n = cont.getNumber();
+           ArrayList<Tag> t =cont.getTag();
+           
+            /*formatto le email*/
+           String email= formattaOut(e);
+           
+            /*formatto i numeri*/
+           String number= formattaOut(n);
+           
+           /*formatto i tag*/
+           ArrayList<String> St= new ArrayList<>();
+           for (Tag i : t) { 
+               St.add(i.name());
+           }
+           String tag= formattaOut(St);
+           
+           
+           String query= String.format("insert into %s(email,name,surname,email_contact,number,tag) values('%s','%s','%s','%s','%s','%s');",tableName,  email_Utente,nm,srn,email,number,tag);
+           statment= conn.createStatement();
+           statment.executeUpdate(query);
+           System.out.println("Utente inserito");
+        
+    }
+
+    private String formattaOut(ArrayList<String> s) {
+        
+        String formattata="";
+        for(String i: s){
+          
+            formattata=formattata+i+";";
+        }
+        return formattata;
+    }
 }
+

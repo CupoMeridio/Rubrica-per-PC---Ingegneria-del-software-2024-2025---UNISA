@@ -4,46 +4,64 @@
  */
 package com.mycompany.maindb;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cupom
  */
 public class Contact extends Person{
-    private String[] number;
-    private String[] email;
-    private Tag[] tag;
+    private ArrayList<String> number;
+    private ArrayList<String> email;
+    private ArrayList<Tag> tag;
     
     public Contact(String name, String surname) {
         super(name, surname);
-        number = new String[3];
-        email = new String[3];
-        this.tag= new Tag[3];
-    }
-    
-    public String[] getNumber(){
-        return this.number;
+        number = new ArrayList<String>();
+        email = new ArrayList<String>();
+        this.tag= new ArrayList<Tag>();
     }
 
-    public String[] getEmail() {
+    public void setNumber(ArrayList<String> number) {
+        this.number = number;
+    }
+
+    public void setEmail(ArrayList<String> email) {
+        this.email = email;
+    }
+
+    public void setTag(ArrayList<Tag> tag) {
+        this.tag = tag;
+    }
+    
+    public ArrayList<Tag> getTag() {
+        return tag;
+    }
+    public ArrayList<String> getNumber(){
+        return this.number ;
+    }
+
+    public ArrayList<String> getEmail() {
         return email;
     }
 
     public void addTag(Tag tag) {
-        if(this.tag.length<3)
-            this.tag[this.tag.length] = tag;
+        if(this.tag.size()<3)
+            this.tag.set(this.tag.size(), tag);
         //gestire l' elese
         
     }
     
     public void addNumber(String number) {
-        if (this.number.length>=3){
+        
+        if (this.number.size()>=3){
             //gestire
         }
         
     }
     
     public void addEmail(String email){
-        if (this.email.length>=3){
+        if (this.email.size()>=3){
             //gestire
         }
     }
@@ -56,10 +74,10 @@ public class Contact extends Person{
     @Override
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
-        for (int i=0; i<this.number.length;i++)
-            sb=sb.append(" Phone number: ").append(number[i]);
-        for (int i=0; i<this.email.length;i++)
-            sb=sb.append(" Email: ").append(email[i]);
+        for (int i=0; i<this.number.size();i++)
+            sb=sb.append(" Phone number: ").append(number.get(i));
+        for (int i=0; i<this.email.size();i++)
+            sb=sb.append(" Email: ").append(email.get(i));
         return sb.toString();
     }
     
