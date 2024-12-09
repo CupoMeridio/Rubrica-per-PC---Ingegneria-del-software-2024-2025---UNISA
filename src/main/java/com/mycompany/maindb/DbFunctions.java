@@ -22,7 +22,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Mattia Sanzari
  */
-public class DbFunctions {
+public class DbFunctions {   
     public Connection ConnectionDB(String dbname, String user, String password) {
         Connection conn=null;
         
@@ -30,7 +30,8 @@ public class DbFunctions {
         try {
             Class.forName("org.postgresql.Driver");
             System.out.print("Driver trovato ");
-            conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password);
+            //conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password);
+            conn=DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password);
             if(conn!=null){
                 System.out.println("Connessione Stabilita");
             }else{
@@ -85,6 +86,7 @@ public class DbFunctions {
     
     public int checkLogin(Connection conn,String tableName, String email, String password) throws SQLException{
     
+        
     ResultSet rs= null;
     int esito;  
             Statement statment;
@@ -124,7 +126,7 @@ public class DbFunctions {
         return BCrypt.checkpw(password, hashed);
     }
     
-     public HashMap<String, Contact> getContatti(Connection conn, String tableName,String email){
+    public HashMap<String, Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;
@@ -192,9 +194,9 @@ public class DbFunctions {
            String srn=cont.getSurname();
            String ID= String.valueOf(cont.getID());
            
-           ArrayList<String> e = cont.getEmail();
-           ArrayList<String> n = cont.getNumber();
-           ArrayList<Tag> t =cont.getTag();
+           ArrayList<String> e = cont.getEmailList();
+           ArrayList<String> n = cont.getNumberList();
+           ArrayList<Tag> t =cont.getTagList();
            
             /*formatto le email*/
            String email= formattaOut(e);
@@ -226,6 +228,79 @@ public class DbFunctions {
             formattata=formattata+i+";";
         }
         return formattata;
+    }
+    
+    public void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+        
+         Statement statment;
+           String nm=cont.getName();
+           String srn=cont.getSurname();
+           String ID= String.valueOf(cont.getID());
+           
+           ArrayList<String> e = cont.getEmailList();
+           ArrayList<String> n = cont.getNumberList();
+           ArrayList<Tag> t =cont.getTagList();
+        
+             /*formatto le email*/
+           String email= formattaOut(e);
+           
+            /*formatto i numeri*/
+           String number= formattaOut(n);
+           
+           /*formatto i tag*/
+           ArrayList<String> St= new ArrayList<>();
+           for (Tag i : t) { 
+               St.add(i.name());
+           }
+           String tag= formattaOut(St);
+           
+           
+      String query = String.format("UPDATE into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s'); WHERE email='%s'",tableName,  email_Utente,nm,srn,number,tag,email,ID,email_Utente);
+      
+      statment= conn.createStatement();
+      statment.executeUpdate(query);
+      System.out.println("Contatto modificato");
+    }
+    
+       public void remuveContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
+    
+       Statement statment;
+       
+       String query= String.format("delete from %s where ID='%s' AND email='%s'",tableName,ID,email);
+       statment= conn.createStatement();
+       statment.execute(query);
+       System.out.print("\n Dato eliminato per ID");
+    }
+    /**
+    * 
+    * @brief Chiude la connessione col database
+    * @param conn Oggetto Connection per interagire con il database.
+    * 
+    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    */
+
+    
+    public void CloseConnection(Connection conn) throws SQLException{
+        conn.close();
+        System.out.print("Chiusura connessione");
+    }
+    
+    public int getNumberContact(Connection conn, String tableName){
+        
+        int numero_righe=0;
+        try {
+            Statement statement = conn.createStatement();
+            String query = String.format("SELECT COUNT(*) AS rowcount FROM %s", tableName);//conta il numero di righe nella tabella nome_tabella e assegna il risultato alla colonna rowcount
+            ResultSet rs = statement.executeQuery(query);
+            if (rs.next()) { 
+             numero_righe = rs.getInt("rowcount"); 
+            System.out.println("Numero di righe: " + numero_righe); 
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(DbFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+         
+        return numero_righe;
     }
 }
 
