@@ -37,56 +37,14 @@ Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso 
 git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 ```
 Configurare il database:
-(istruzioni per l'installazione e configurazione del database ancora da definire)
+L'applicazione utilizza un database online tramite i servizi offerti da https://aiven.io
+Dati però i frequenti problemi della piattaforma, è possibile configurare il programma per funzionare con un database locale:
+- Scaricare PostgreSQL -> https://www.postgresql.org
+- Aprire pgAdmin4 -> Servers -> tasto destro su PostgreSQL 17 -> Create -> Database.
+  Impostare "rubrica" come nome del database e "postgres" come Owner.
+  Tasto destro sul database appena creato -> Backup -> selezionare il file rubrica.sql e confermare
+Dopo aver configurato il database locale è necessario effettuare alcune piccole modifiche al codice del progetto netbeans (da definire)
+
 
 Avviare l'applicazione:
 (comandi per eseguire l'applicazione ancora da definire)
-
----
-
-# 🇬🇧
-# 📒 Address book for PC
-### University of Salerno (UNISA)
-**Computer Engineering Course**
-**Group 02 - University Project**
-
----
-
-## 🚀 Project Description
-This project consists of the development of a PC application dedicated to managing an address book. The goal is to provide an intuitive and functional tool that allows users to easily save, organize and search contacts.
-
-## 📋 Main Features
-- **Registration and Login:** Secure access with user credentials.
-- **Contact Management:** Adding, editing, deleting and viewing contacts.
-- **Advanced Search:** Custom filters to quickly find contacts.
-- **Export/Import:** Saving contacts in standard formats (e.g. CSV).
-
-## 🛠️ Technologies Used
-- **Programming Language:** Java
-- **Database:** PostgreSQL
-- **Frameworks and Libraries:** JavaFx
-- **Versioning Tools:** Git/GitHub
-
-## 👥 Development Team
-The project was created by Group 02, made up of 4 students from the Computer Engineering course at the University of Salerno (UNISA):
-
-- **Postiglione Vittorio**
-- **Quaranta Valeria**
-- **Sanzari Mattia**
-- **Zouhri Anuar**
-
-## 📦 Installation
-
-**Clone the repository:**
-
-```bash
-git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
-```
-Configure the database:
-(instructions for installing and configuring the database still to be defined)
-
-Start the application:
-(commands to run the application yet to be defined)
-
-
-
