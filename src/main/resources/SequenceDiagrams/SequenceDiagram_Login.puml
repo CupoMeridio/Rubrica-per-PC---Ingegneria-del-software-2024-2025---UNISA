@@ -1,0 +1,31 @@
+@startuml
+actor Utente_registrato
+participant "LoginViewController" as LoginViewController
+participant "App" as App 
+participant "Database" as db
+
+Utente_registrato -> LoginViewController: run
+
+
+
+activate db
+activate LoginViewController
+LoginViewController -> db: new
+LoginViewController -> db: ConnectionDB
+db --> LoginViewController: Connection
+
+LoginViewController -> db: checkLogin
+db --> LoginViewController
+deactivate db
+opt checkLogin()==true
+LoginViewController -> App: setRoot("ContactsbookView")
+activate App
+deactivate App
+deactivate LoginViewController
+end
+
+
+
+
+
+@enduml

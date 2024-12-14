@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['getboolean_0',['getBoolean',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_duplicate_contact_view_controller.html#a2f6b3e1f3ebf1c73a21965444e20068a',1,'it::unisa::diem::team02::contactsbook::ui::controllers::DuplicateContactViewController']]],
+  ['getcontact_1',['getContact',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html#aa2888755009ae4486f5de4ae8fc2fac6',1,'it::unisa::diem::team02::contactsbook::database::Database']]],
+  ['getcontacts_2',['getContacts',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contactbook.html#a2834071edc82652aaffbc33b683ac036',1,'it::unisa::diem::team02::contactsbook::model::Contactbook']]],
+  ['getemail_3',['getEmail',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a8ae09f697ccb53df4929e59778022e23',1,'it.unisa.diem.team02.contactsbook.model.Contact.getEmail()'],['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_user.html#a6a775367d185221e3ae5a3498499c2a0',1,'it.unisa.diem.team02.contactsbook.model.User.getEmail()']]],
+  ['getemaillist_4',['getEmailList',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a30abb7bd431a058b4a08777b44d53407',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getflcontacts_5',['getFlContacts',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_filter.html#afadddeb3e1c0e471efe584725bdff15e',1,'it::unisa::diem::team02::contactsbook::model::Filter']]],
+  ['getid_6',['getID',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a3cf98568692ad19af729981c13157fe3',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getisselectedhome_7',['getIsSelectedHome',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_filter.html#a27cda2081daa7f48075b774064a8d17e',1,'it::unisa::diem::team02::contactsbook::model::Filter']]],
+  ['getisselectedjob_8',['getIsSelectedJob',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_filter.html#a555616cc0ecaa5202ab5ae5f048b3215',1,'it::unisa::diem::team02::contactsbook::model::Filter']]],
+  ['getisselecteduniversity_9',['getIsSelectedUniversity',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_filter.html#acfcd4f574a464609b0ac0a8a70a3ffd1',1,'it::unisa::diem::team02::contactsbook::model::Filter']]],
+  ['getmatchstring_10',['getMatchString',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_filter.html#a460484beb5d0f6e3cb9c5375a05cc9e3',1,'it::unisa::diem::team02::contactsbook::model::Filter']]],
+  ['getname_11',['getName',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a634ac018ee03041936fb7f8ed000927d',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getnumber_12',['getNumber',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#ab847ca2137676dda0b77dd31bed0436f',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getnumbercontact_13',['getNumberContact',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html#a052915aecbb9348d47b76a7a4fad41e0',1,'it::unisa::diem::team02::contactsbook::database::Database']]],
+  ['getnumberlist_14',['getNumberList',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a44e0de09654ac80e916e01f5734196e2',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getsurname_15',['getSurname',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a75e33721a14628bd5af0361129cdfc38',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['gettag_16',['getTag',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#ad0586bf478c27a2815882f3fabcc9e78',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['gettaglist_17',['getTagList',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#ab9cfb4a47fb7141f9f166107b010d0e1',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
+  ['getuser_18',['getUser',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html#a3f82e70f5d06f24664676cc9bba56e6f',1,'it::unisa::diem::team02::contactsbook::database::Database']]]
+];

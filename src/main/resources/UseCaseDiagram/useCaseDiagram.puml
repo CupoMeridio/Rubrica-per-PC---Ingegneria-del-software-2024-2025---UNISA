@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+actor Utente as u
+actor "Utente registrato" as ur
+rectangle Rubrica{
+    usecase "Operazioni Rubrica" as or
+    usecase "Registrazione" as reg
+    usecase "Login" as log
+    usecase "Aggiungere contatto" as agg
+    usecase "Rimuovere contatto" as rim
+    usecase "Modificare informazioni per un contatto già esistente" as mod
+    usecase "Ricerca contatti" as ric
+    usecase "Importare contatti" as imp
+    usecase "Esportare contatti" as esp
+    usecase "Ordinare contatti" as ord
+    usecase "Filtrare contatti" as fil
+    usecase "Contatto duplicato" as cont
+    usecase "Salvataggio" as salva
+}
+
+
+
+ur--or
+
+
+u--reg
+ur --|>u
+
+
+
+reg ..>log: <<extend>>
+or ..>log: <<include>>
+agg --|>or
+rim --|>or
+mod --|>or
+ric --|>or
+imp ..>agg: <<include>>
+esp --|>or
+fil --|>or
+ord --|>or
+cont ..>agg: <<extend>>
+cont ..>mod: <<extend>>
+agg ..>salva: <<include>>
+mod ..>salva: <<include>>
+
+rim ..>salva: <<include>>
+
+
+
+
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+actor Utente
+participant LoginViewController
+participant  Database
+
+Utente->LoginViewController:run
+activate LoginViewController
+LoginViewController -> Database: new
+LoginViewController -> Database: ConnectionDB
+Database --> LoginViewController: Connection
+
+activate Database
+opt btnSignIn is abilitato
+Utente->LoginViewController:actionSignin
+LoginViewController -> Database: insertUser 
+
+
+ Database -> Database: executeUpdate
+
+Database --> LoginViewController
+end
+
+@enduml

@@ -1,0 +1,308 @@
+@startuml
+
+class App {
+    - Scene scene
+    --
+    + void start(Stage stage)
+    + {static} void setRoot(String fxml)
+    - {static} Parent loadFXML(String fxml)
+    + void main(String[] args)
+}
+
+class Database {
+    + Connection connectDB(String dbname, String user, String password)
+    + void insertUser(Connection conn, String tableName, String email, String password)    
+    + HashMap<String, Contact> getUser(Connection conn, String tablename)
+    + int checkLogin(Connection conn,String tableName, String email, String password)
+    + {static} String hashPassword(String password)
+    + {static} boolean checkPassword(String password, String hashed)
+    + HashMap<String, Contact> getContact(Connection conn, String tableName,String email)
+    + Contact createContact(String name, String surname, String numeri, String tag, String em_cont,String ID)
+    + void insertContact(Connection conn, String tableName, Contact cont, String email_Utente)
+    - String formattaOut(ArrayList<String> s)
+    + void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente)
+    + void removeContactByID(Connection conn, String tableName, String ID, String email)
+    + void closeConnection(Connection conn)
+    + int getNumberContact(Connection conn, String tableName)
+}
+
+
+class User {
+    - String password
+    - String email
+    --
+    + User(String password, String email)
+    + String setPassword()
+    + String getEmail()
+    + String toString()
+}
+
+class Contact {
+    - String name
+    - String surname
+    - ArrayList<String> number
+    - ArrayList<String> email
+    - ArrayList<Tag> tag
+    - {final} String ID
+    --
+    + Contact(String name, String surname, String email)
+    + Contact(String name, String surname, String ID)
+    + String getName()
+    + String getSurname()
+    + String setName()
+    + String setSurname()
+    + String getNumber()
+    + String getEmail()
+    + String getTag()
+    + String addTag()
+    + String addNumber()
+    + String addEmail()
+    + String setNumber()
+    + String setEmail()
+    + String setTag()
+    + ArrayList<String> getNumberList()
+    + ArrayList<String> getEmailList()
+    + ArrayList<Tag> getTagList()
+    + String getID()
+    + boolean equals(Object o)
+    + String toString()
+    - String generateID()
+}
+
+class Contactbook {
+    - ObservableList<Contact> contacts
+    --
+    + Contactbook()
+    + ObservableList<Contact> getContacts()
+    + void delete(Contact c)
+    + void add(Contact c)
+    + boolean contains(Contact c)
+    + boolean contains(Contact newC, Contact oldC)
+    + void initializeList()
+    + void loadFromFile(File filename)
+    + void saveOnFile(File filename)
+
+}
+
+class Filter {
+    - FilteredList<Contact> flContacts
+    - String matchString
+    - boolean isSelectedHome
+    - boolean isSelectedUni
+    - boolean isSelectedJob
+    --
+    + Filter(ObservableList<Contact> list)
+    + String getMatchString()
+    + boolean getIsSelectedHome()
+    + boolean getIsSelectedUniversity()
+    + boolean getIsSelectedJob()
+    + FilteredList<Contact> getFlContacts()
+    + void updateFilter(String string, boolean h, boolean u, boolean j)
+
+}
+
+class LoginViewController {
+    - VBox vBoxLogin
+    - HBox hboxLogin
+    - VBox vboxSignin
+    - Label lblLogMail
+    - TextField txtLogMail
+    - Label lblLogPass
+    - PasswordField txtLogPass
+    - Button btnLogin
+    - Button btnLoginLocal
+    - Label lblSignMail
+    - TextField txtSignMail
+    - Label lblSignPass
+    - PasswordField txtSignPass
+    - Label lblSignConfirm
+    - PasswordField txtConfirmPass
+    - Button btnSign
+    - Label lblErrorPass
+    - Label lblPassInequals
+    - Label lblErrorEmail
+    - Label lblLogErr
+    - Label lblLogOpp
+    - Label txtSignError
+    - BooleanProperty bMail
+    - BooleanProperty bPass
+    - BooleanProperty bConfirm
+    -{static} Connection connection
+    --
+    + void initialize(URL url, ResourceBundle rb)
+    - BooleanProperty txtSignMailInitialize()
+    - BooleanProperty txtSignPassInitialize()
+    - BooleanProperty txtConfirmPassInitialize()
+    - boolean isValidEmail(String email)
+    - boolean isValidPassword(String password)
+    + void actionLogin(ActionEvent event)
+    - void actionSignin(ActionEvent event)
+    - void keyEmailSign(KeyEvent event)
+    - void keyPassSign(KeyEvent event)
+    - void keyConfirmPass(KeyEvent event)
+}
+
+class AddViewController {
+    - HBox hboxInsertInfo
+    - HBox hboxName
+    - HBox hboxSur
+    - HBox hboxEmail
+    - HBox hboxNumber
+    - HBox hboxButton
+    - VBox vboxName
+    - VBox vboxSur
+    - VBox vboxEmail
+    - VBox vboxNumber
+    - Label lblName
+    - Label lblSur
+    - Label lblEmail
+    - Label lblNumber
+    - Label lblTag
+    - TextField txtName
+    - TextField txtSur
+    - TextField txtEmail1
+    - TextField txtEmail2
+    - TextField txtEmail3
+    - TextField txtNumber1
+    - TextField txtNumber2
+    - TextField txtNumber3
+    - Button btnAdd
+    - Button btnCanc
+    - CheckBox chkmHome
+    - CheckBox chkmUni
+    - CheckBox chkmJob
+    - Contactbook contactbook
+    --
+    + void initialize(URL url, ResourceBundle rb)
+    + void setContactbook(Contactbook c)
+    + void actionAdd(ActionEvent event)
+    + void actionCanel(ActionEvent event)
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
+}
+
+class ModifyViewController {
+    - HBox hboxInsertInfo
+    - HBox hboxName
+    - HBox hboxSur
+    - HBox hboxEmail
+    - HBox hboxNumber
+    - HBox hboxButton
+    - VBox vboxName
+    - VBox vboxSur
+    - VBox vboxEmail
+    - VBox vboxNumber
+    - Label lblName
+    - Label lblSur
+    - Label lblEmail
+    - Label lblNumber
+    - Label lblTag
+    - TextField txtName
+    - TextField txtSur
+    - TextField txtEmail1
+    - TextField txtEmail2
+    - TextField txtEmail3
+    - TextField txtNumber1
+    - TextField txtNumber2
+    - TextField txtNumber3
+    - Button btnAdd
+    - Button btnCanc
+    - CheckBox chkmHome
+    - CheckBox chkmUni
+    - CheckBox chkmJob
+    - Contactbook contactbook
+    - Contact oldContact
+    --
+    + void initialize(URL url, ResourceBundle rb)
+    + void actionCancel(ActionEvent event)
+    + void setContactbook(Contactbook c)
+    + void setContact(Contact contact)
+    + void actionModify(ActionEvent event)
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
+}
+
+class ContactsbookViewController {
+    - AnchorPane anchorUp
+    - AnchorPane anchorBottom
+    - HBox hboxButton
+    - TableView<Contact> tblvRubrica
+    - TableColumn<Contact, String> clmName
+    - TableColumn<Contact, String> clmSur
+    - TableColumn<Contact, String> clmEmail
+    - TableColumn<Contact, String> clmNum
+    - TableColumn<Contact, String> clmTag
+    - TextField txtSearch
+    - MenuButton mbtnFilter
+    - CheckMenuItem chkmHome
+    - CheckMenuItem chkmUni
+    - CheckMenuItem chkmJob
+    - Button btnAdd
+    - Button btnDelete
+    - Button btnModify
+    - Button btnImport
+    - Button btnExport
+    - Button btnLogout
+    - Contactbook contactbook
+    - Filter filter
+    - SortedList<Contact> sortedContacts
+    --
+    + void createList()
+    + void initializeList()
+    + void actionAdd(ActionEvent event)
+    + void actionModify(ActionEvent event)
+    + void btnModifyInitialize()
+    + void btnDeleteInitialize()
+    + void void actionDelete(ActionEvent event)
+    + void actionFilter(FilteredList<Contact> flContacts)
+    + void initializeSearch(FilteredList<Contact> flContacts)
+    + void actionImport(ActionEvent event)
+    + void actionExport(ActionEvent event)
+    + void initialize(URL url, ResourceBundle rb)
+    + void actionLogout(ActionEvent event)
+}
+
+class DuplicateContactViewController {
+    - Label lblMessage;
+    - Button btnYes;
+    - Button btnNo;
+    - Boolean b
+    --
+    + void initialize(URL url, ResourceBundle rb)
+    + void actionYes(ActionEvent event)
+    + void actionNo(ActionEvent event)
+    + Boolean getBoolean()
+}
+
+enum Tag {
+    Home
+    University
+    Job
+}
+
+' Relazioni tra classi
+Tag --> Contact : Association
+DuplicateContactViewController -> AddViewController : Association
+DuplicateContactViewController -> ModifyViewController : Association
+AddViewController -> Database : Association
+ContactsbookViewController : Association
+ModifyViewController : Association 
+
+ContactsbookViewController "1" *-- "1" Contactbook : Composition
+ContactsbookViewController "1" *-- "1" Filter : Composition
+
+Filter "1" o-- "1" Contactbook : Aggregation
+AddViewController "1" o-- "1" Contactbook : Aggregation
+ModifyViewController  "1" o-- "1"  Contactbook : Aggregation 
+Contactbook "1" o-- "0..*" Contact  : Aggregation
+User "1" *-- "1" Database: Aggregation
+
+
+LoginViewController ..> Database : Dependency
+LoginViewController ..> App : Dependency
+
+@enduml

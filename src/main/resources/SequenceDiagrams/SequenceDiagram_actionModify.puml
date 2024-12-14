@@ -1,0 +1,64 @@
+@startuml
+actor Utente_registrato
+participant ContactsbookViewController
+participant ModifyViewController
+participant Contact
+participant DuplicateContactViewController
+participant Contactbook
+participant Database
+
+
+Utente_registrato -> ContactsbookViewController: actionModify
+activate ContactsbookViewController
+ContactsbookViewController->ModifyViewController: setContactbook
+activate ModifyViewController
+ContactsbookViewController->ModifyViewController: setContact
+alt Cancel
+    ModifyViewController-->ContactsbookViewController
+else Modify
+    ModifyViewController->Contact: new
+    activate Contact
+        ModifyViewController->Contact:setNumber
+        ModifyViewController->Contact:setEmail
+        ModifyViewController->Contact:setTag
+    deactivate Contact
+    ModifyViewController->Contactbook: contains
+alt Contatto duplicato
+    ModifyViewController -> DuplicateContactViewController
+    activate DuplicateContactViewController
+    DuplicateContactViewController-->ModifyViewController
+    ModifyViewController->DuplicateContactViewController: getBoolean
+    deactivate DuplicateContactViewController 
+        alt true
+            ModifyViewController->Contactbook:remove
+            ModifyViewController->Contactbook:add
+            ModifyViewController-->Database: modifyContact
+            activate Database
+            loop 3
+             Database -> Database: formattaOut
+            end 
+            Database -> Database: executeUpdate
+            Database --> ModifyViewController
+            deactivate Database
+        else false
+            ModifyViewController->ModifyViewController:show
+        end
+else Contatto non duplicato
+ModifyViewController->Contactbook: remove
+ModifyViewController->Contactbook: add
+ModifyViewController-->Database: modifyContact
+activate Database
+            loop 3
+             Database -> Database: formattaOut
+            end 
+            Database -> Database: executeUpdate
+            Database --> ModifyViewController
+            deactivate Database
+end
+activate Database
+end
+deactivate ModifyViewController
+deactivate Database
+ModifyViewController-->ContactsbookViewController
+deactivate ContactsbookViewController
+@enduml 
