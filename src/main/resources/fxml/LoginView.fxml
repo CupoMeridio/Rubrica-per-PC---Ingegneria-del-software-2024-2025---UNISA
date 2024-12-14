@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="login" prefHeight="507.0" prefWidth="811.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.LoginViewController">
+    <stylesheets>
+        <URL value="@/styles/login.css" />
+    </stylesheets>
+   <children>
+      <HBox fx:id="hboxLogin" alignment="CENTER" layoutX="19.0" layoutY="40.0" prefHeight="210.0" prefWidth="782.0" spacing="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox fx:id="vBoxLogin" prefHeight="507.0" prefWidth="302.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblLogMail" text="E-mail" />
+                  <TextField fx:id="txtLogMail" />
+                  <Label fx:id="lblLogPass" text="Password" />
+                  <PasswordField fx:id="txtLogPass" />
+                  
+                  <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="Login" />
+                  <Label fx:id="lblLogErr" prefHeight="37.0" prefWidth="276.0" />
+                  <!-- Centrare il bottone e l'etichetta 'oppure' -->
+                  <HBox alignment="CENTER" spacing="10.0" />
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="233.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="30.0" top="127.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="vboxSignin" prefHeight="507.0" prefWidth="351.0" spacing="7.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblSignMail" text="E-mail" />
+                  <TextField fx:id="txtSignMail" onKeyPressed="#keyEmailSign" />
+                  <Label fx:id="lblErrorEmail" />
+                  <Label fx:id="lblSignPass" text="Password" />
+                  <PasswordField fx:id="txtSignPass" onKeyPressed="#keyPassSign" />
+                  <Label fx:id="lblErrorPass" />
+                  <Label fx:id="lblSignConfirm" layoutX="10.0" layoutY="10.0" text="Confirm password" />
+                  <PasswordField fx:id="txtConfirmPass" layoutX="30.0" layoutY="168.0" onKeyPressed="#keyConfirmPass" />
+                  <Label fx:id="lblPassInequals" />
+                  <Button fx:id="btnSign" mnemonicParsing="false" onAction="#actionSignin" text="Sign-in" />
+                  <Label fx:id="txtSignError" prefHeight="52.0" prefWidth="322.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="60.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

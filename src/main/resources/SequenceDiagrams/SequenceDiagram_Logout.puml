@@ -1,0 +1,24 @@
+@startuml
+
+actor Utente_registrato
+participant "ContactsbookViewController" as ContactsbookViewController
+participant "App" as App 
+participant "Database" as db
+
+Utente_registrato -> ContactsbookViewController: logout
+
+
+activate db
+activate ContactsbookViewController
+ContactsbookViewController -> db: CloseConnection
+db --> ContactsbookViewController
+
+deactivate db
+ContactsbookViewController -> App: setRoot("LoginView")
+activate App
+deactivate App
+deactivate ContactsbookViewController
+
+
+
+@enduml

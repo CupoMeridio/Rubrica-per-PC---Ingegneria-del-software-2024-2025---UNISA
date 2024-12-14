@@ -1,0 +1,65 @@
+@startuml
+actor Utente_registrato
+participant ContactsbookViewController
+participant AddViewController
+participant Contact
+participant DuplicateContactViewController
+participant Contactbook
+participant Database
+
+activate Database
+activate ContactsbookViewController
+Utente_registrato -> ContactsbookViewController: actionAdd
+ContactsbookViewController->AddViewController: setContactbook
+activate AddViewController
+alt Cancel
+    AddViewController-->ContactsbookViewController
+else Add
+    AddViewController -> Contact: new
+    activate Contact
+    opt Numero di telefono presente
+        AddViewController -> Contact: addNumber
+    end
+    opt Email presente
+        AddViewController -> Contact: addEmail
+    end
+    opt Tag presente
+        AddViewController->Contact: addTag
+    end
+    Contact --> AddViewController
+    deactivate Contact
+    AddViewController->Contactbook: contains
+    Contactbook-->AddViewController
+
+    alt Contatto duplicato
+        AddViewController --> DuplicateContactViewController
+        activate DuplicateContactViewController
+        AddViewController->DuplicateContactViewController:get
+        deactivate DuplicateContactViewController 
+            alt true
+                AddViewController->Contactbook:add
+                AddViewController-->Database: insertContact
+                loop 3
+                 Database -> Database: formattaOut
+                end 
+                Database -> Database: executeUpdate
+                Database --> AddViewController
+            else false
+                AddViewController->AddViewController:show
+            end
+    else Contatto non duplicato
+        AddViewController->Contactbook: add
+        AddViewController -> Database: insertContact 
+
+        loop 3
+         Database -> Database: formattaOut
+        end 
+        Database -> Database: executeUpdate
+        Database --> AddViewController
+    end
+end
+deactivate Contact
+AddViewController-->ContactsbookViewController
+deactivate AddViewController
+deactivate ContactsbookViewController
+@enduml 
