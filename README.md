@@ -43,7 +43,6 @@ Dati però i frequenti problemi della piattaforma, è possibile configurare il p
 - Aprire pgAdmin4 -> Servers -> tasto destro su PostgreSQL 17 -> Create -> Database.
   Impostare "rubrica" come nome del database e "postgres" come Owner.
   Tasto destro sul database appena creato -> Backup -> selezionare il file rubrica.sql e confermare
-Dopo aver configurato il database locale è necessario effettuare alcune piccole modifiche al codice del progetto netbeans (da definire)
 
 
 Avviare l'applicazione:
