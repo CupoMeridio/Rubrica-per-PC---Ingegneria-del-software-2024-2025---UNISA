@@ -106,14 +106,14 @@ public class ContactsbookViewController implements Initializable {
  * @post Gli elementi dell'interfaccia sono stati configurati correttamente e la lista è pronta per l'uso.
  * @invariant La lista di contatti viene creata e popolata, i bottoni di modifica e cancellazione sono abilitati e la ricerca è configurata.
  * 
- * @see createList(), tblvContactsInizialize(), btnModifyInitialize(), btnDeleteInitialize(), initializeSearch()
+ * @see createList(), tblvContactsInizialize(), btnModifyInitialize(), btnDeleteInitialize()
  */
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tblvContactsInizialize();
         createList();
-        btnMofidyInitialize();
+        btnModifyInitialize();
         btnDeleteInitialize();
         initializeSearch();
         mbtnFilter.setOnShown(event->{actionFilter();});
@@ -278,7 +278,7 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @post Il bottone di modifica sarà disabilitato finché non viene selezionato un contatto nella tabella.
  */
-    public void btnMofidyInitialize(){
+    public void btnModifyInitialize(){
         btnModify.setDisable(true);
 
         tblvContacts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
@@ -371,29 +371,26 @@ public class ContactsbookViewController implements Initializable {
         }
 
          
-    /**
-    * @brief Inizializza la funzionalità di ricerca per filtrare i contatti in funzione di una sottostringa inserita
-    * all'interno della barra di ricerca.
-    * 
-    * Questo metodo imposta un campo di ricerca che permette agli utenti di filtrare i contatti 
-    * nella rubrica in base ai criteri inseriti nella barra di ricerca. Ogni volta che l'utente 
-    * digita un carattere, la lista dei contatti viene filtrata in tempo reale richiamando il metodo 
-    * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti. La ricerca viene eseguita
-    * su tutti i campi eccetto il campo tag.
-    *
-    * 
-    * 
-    * @pre La lista filtrata deve essere inizializzata correttamente.
-    * @pre La tabella tblvContacts deve essere inizializzata correttamente.
-    * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
-    *   sottostringa inserita nella barra di ricerca.
-    *
-    * @invariant non viene rimosso il filtro da actionFilter()
-    * 
-    * 
-    * @see Filter
-    * 
-    */
+/**
+ * @brief Inizializza la funzionalità di ricerca per filtrare i contatti in funzione di una sottostringa inserita
+ * all'interno della barra di ricerca.
+ * 
+ * Questo metodo imposta un campo di ricerca che permette agli utenti di filtrare i contatti 
+ * nella rubrica in base ai criteri inseriti nella barra di ricerca. Ogni volta che l'utente 
+ * digita un carattere, la lista dei contatti viene filtrata in tempo reale richiamando il metodo 
+ * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti. La ricerca viene eseguita
+ * su tutti i campi eccetto il campo tag.
+ *
+ * 
+ * 
+ * @pre La lista filtrata deve essere inizializzata correttamente.
+ * @pre La tabella tblvContacts deve essere inizializzata correttamente.
+ * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
+ *   sottostringa inserita nella barra di ricerca.
+ *
+ * @invariant non viene rimosso il filtro da actionFilter()
+ * @see Filter
+ */
     private void initializeSearch() {
         
         SimpleStringProperty string = new SimpleStringProperty("");
@@ -403,8 +400,6 @@ public class ContactsbookViewController implements Initializable {
         //Listener al campo testo txtSearch
         txtSearch.textProperty().addListener((obs, oldValue, newValue) -> filter.updateFilter(
         txtSearch.getText(),chkmHome.isSelected(),chkmUni.isSelected(),chkmJob.isSelected()));
-        
-
     }
     
 
