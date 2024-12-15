@@ -121,8 +121,6 @@ public class LoginViewController implements Initializable {
  * @post
  * - Il pulsante `btnSign` sarà abilitato solo se tutte le condizioni nei campi di input sono soddisfatte.
  * 
- * @invariant
- * - La UI deve essere in uno stato consistente, con proprietà di binding correttamente applicate.
  * 
  */
     @Override
@@ -155,9 +153,6 @@ public void initialize(URL url, ResourceBundle rb) {
  *   - Verde per valido.
  *   - Rosso per non valido.
  * - L'etichetta `lblErrorEmail` sarà aggiornata con un messaggio di errore per email non valide.
- * 
- * @invariant
- * - La proprietà booleana riflette sempre lo stato corrente della validità dell'email.
  * 
  * @see #isValidEmail(String)
  * 
@@ -196,9 +191,6 @@ private void txtSignMailInitialize() {
  *   - Verde per valida.
  *   - Rosso per invalida.
  * - L'etichetta `lblErrorPass` sarà aggiornata con un messaggio di errore per password non valide.
- * 
- * @invariant
- * - La proprietà booleana riflette sempre lo stato corrente della validità della password.
  * 
  * @see #isValidPassword(String)
  * 
@@ -240,9 +232,6 @@ private void txtSignPassInitialize() {
  *   - Rosso per non corrispondenti.
  * - L'etichetta `lblPassInequals` sarà aggiornata con un messaggio di errore in caso di non corrispondenza.
  * 
- * @invariant
- * - La proprietà booleana riflette sempre lo stato corrente della corrispondenza delle password.
- * 
  * @note Lo stile del bordo è modificato tramite CSS inline.
  */
 private void txtConfirmPassInitialize() {
@@ -278,9 +267,6 @@ private void txtConfirmPassInitialize() {
  * @post
  * - Nessuna modifica a stati esterni o variabili di istanza.
  * 
- * @invariant
- * - La validità di un indirizzo email è determinata esclusivamente dal confronto con 
- *   l'espressione regolare definita.
  * 
  * @note
  * L'espressione regolare utilizzata supporta:
@@ -313,9 +299,6 @@ private void txtConfirmPassInitialize() {
  * @post
  * - Nessuna modifica a stati esterni o variabili di istanza.
  * 
- * @invariant
- * - La validità di una password è determinata esclusivamente dal confronto con 
- *   l'espressione regolare definita.
  * 
  * @note
  * L'espressione regolare utilizzata supporta:
@@ -409,11 +392,23 @@ private void txtConfirmPassInitialize() {
             
     }
     
-    /*
-    * Implementa l'azione associata al pulsante Sign-In. Se le credenziali inserite
-    * non sono già presenti nel database permette all'utente di registrarsi
-    */
-    
+/**
+     * Gestisce l'azione di registrazione dell'utente.
+     * 
+     * Questo metodo viene chiamato quando l'utente tenta di registrarsi nel sistema.
+     * Crea una connessione al database, tenta di inserire un nuovo utente e gestisce eventuali errori, come l'email già associata a un account.
+     * Se la registrazione è riuscita, l'utente viene reindirizzato alla schermata di contatti.
+     *
+     * @param event L'evento che ha scatenato l'azione di registrazione.
+     * 
+     * @pre Il database è configurato correttamente e la connessione è stabilita con successo.
+     * @pre L'email e la password sono state inserite correttamente nei campi di testo.
+     * @post Se l'inserimento dell'utente è riuscito, l'utente viene reindirizzato alla vista "ContactsbookView".
+     * @post Se l'email è già associata a un account, viene visualizzato un messaggio di errore e l'utente rimane nella pagina di registrazione.
+     * 
+     * @throws SQLException Se si verifica un errore durante l'inserimento dei dati nel database.
+     * @throws IOException Se si verifica un errore durante il caricamento della vista "ContactsbookView".
+     */
     @FXML
     private void actionSignin(ActionEvent event) {
         Database database= new Database();

@@ -219,7 +219,6 @@ Membri pubblici</h2></td></tr>
 
 <p>Inizializza il comportamento del bottone di eliminazione. </p>
 <p>Questo metodo imposta lo stato del bottone di eliminazione (btnDelete) su disabilitato. Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvContacts). Quando viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.</p>
-<p>Il bottone di eliminazione permette all'utente di eliminare un contatto dalla rubrica. Tuttavia, il bottone è disabilitato quando non è selezionato alcun contatto, impedendo azioni non desiderate.</p>
 <dl class="section post"><dt>Postcondizione</dt><dd>Il bottone di eliminazione sarà disabilitato finché non viene selezionato un contatto nella tabella. </dd></dl>
 
 </div>
@@ -317,11 +316,7 @@ Membri pubblici</h2></td></tr>
 </ul>
 </dd></dl>
 <dl class="section post"><dt>Postcondizione</dt><dd><ul>
-<li>Tutti i contatti recuperati dal database vengono aggiunti alla raccolta <code>contactbook</code>.</li>
-</ul>
-</dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd><ul>
-<li>La raccolta <code>contactbook</code> rimane coerente, contenente solo oggetti <code>Contact</code> validi. </li>
+<li>Tutti i contatti recuperati dal database vengono aggiunti alla raccolta <code>contactbook</code>. </li>
 </ul>
 </dd></dl>
 
