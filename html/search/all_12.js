@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20funzionalità_20principali_0',['📋 Funzionalità Principali',['../index.html#autotoc_md4',1,'']]]
+  ['👥_20team_20di_20sviluppo_0',['👥 Team di Sviluppo',['../index.html#autotoc_md7',1,'']]]
 ];
