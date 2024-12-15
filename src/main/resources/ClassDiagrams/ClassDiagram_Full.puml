@@ -290,7 +290,7 @@ DuplicateContactViewController -> AddViewController : Association
 DuplicateContactViewController -> ModifyViewController : Association
 AddViewController -> Database : Association
 ContactsbookViewController : Association
-ModifyViewController : Association 
+ModifyViewController -> Database : Association 
 
 ContactsbookViewController "1" *-- "1" Contactbook : Composition
 ContactsbookViewController "1" *-- "1" Filter : Composition
