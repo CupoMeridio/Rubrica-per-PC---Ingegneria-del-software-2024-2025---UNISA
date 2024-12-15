@@ -112,9 +112,9 @@ Membri pubblici</h2></td></tr>
 <tr class="memitem:acbd9d16a21a95d2730f6335889e4e278" id="r_acbd9d16a21a95d2730f6335889e4e278"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbd9d16a21a95d2730f6335889e4e278">createList</a> ()</td></tr>
 <tr class="memdesc:acbd9d16a21a95d2730f6335889e4e278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura la tabella visuale con le colonne e i dati dei contatti.  <br /></td></tr>
 <tr class="separator:acbd9d16a21a95d2730f6335889e4e278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75ce3f9a26ae328df39a9b6d899d3122" id="r_a75ce3f9a26ae328df39a9b6d899d3122"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75ce3f9a26ae328df39a9b6d899d3122">tblvRubricaInizialize</a> ()</td></tr>
-<tr class="memdesc:a75ce3f9a26ae328df39a9b6d899d3122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inizializza la tabella dei contatti recuperando i contatti dal database.  <br /></td></tr>
-<tr class="separator:a75ce3f9a26ae328df39a9b6d899d3122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917333f1ce91c1ce2e83539c5be2abd6" id="r_a917333f1ce91c1ce2e83539c5be2abd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a917333f1ce91c1ce2e83539c5be2abd6">tblvContactsInizialize</a> ()</td></tr>
+<tr class="memdesc:a917333f1ce91c1ce2e83539c5be2abd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inizializza la tabella dei contatti recuperando i contatti dal database.  <br /></td></tr>
+<tr class="separator:a917333f1ce91c1ce2e83539c5be2abd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab247fe281a40dd04fdde4ee2a2b0762a" id="r_ab247fe281a40dd04fdde4ee2a2b0762a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab247fe281a40dd04fdde4ee2a2b0762a">actionAdd</a> (ActionEvent event)  throws IOException</td></tr>
 <tr class="memdesc:ab247fe281a40dd04fdde4ee2a2b0762a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apre una nuova finestra per aggiungere un nuovo contatto.  <br /></td></tr>
 <tr class="separator:ab247fe281a40dd04fdde4ee2a2b0762a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,7 +220,7 @@ Membri pubblici</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inizializza il comportamento del bottone di eliminazione. </p>
-<p>Questo metodo imposta lo stato del bottone di eliminazione (btnDelete) su disabilitato. Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvRubrica). Quando viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.</p>
+<p>Questo metodo imposta lo stato del bottone di eliminazione (btnDelete) su disabilitato. Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvContacts). Quando viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.</p>
 <p>Il bottone di eliminazione permette all'utente di eliminare un contatto dalla rubrica. Tuttavia, il bottone è disabilitato quando non è selezionato alcun contatto, impedendo azioni non desiderate.</p>
 <dl class="section post"><dt>Postcondizione</dt><dd>Il bottone di eliminazione sarà disabilitato finché non viene selezionato un contatto nella tabella. </dd></dl>
 
@@ -242,7 +242,7 @@ Membri pubblici</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inizializza il comportamento del bottone di modifica. </p>
-<p>Questo metodo imposta lo stato del bottone di modifica (btnModify) su disabilitato. Inoltre, aggiunge un listener alla selezione della tabella dei contatti (tblvRubrica). Quando viene selezionato un contatto, il bottone di modifica viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.</p>
+<p>Questo metodo imposta lo stato del bottone di modifica (btnModify) su disabilitato. Inoltre, aggiunge un listener alla selezione della tabella dei contatti (tblvContacts). Quando viene selezionato un contatto, il bottone di modifica viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.</p>
 <dl class="section post"><dt>Postcondizione</dt><dd>Il bottone di modifica sarà disabilitato finché non viene selezionato un contatto nella tabella. </dd></dl>
 
 </div>
@@ -297,14 +297,14 @@ Membri pubblici</h2></td></tr>
 
 </div>
 </div>
-<a id="a75ce3f9a26ae328df39a9b6d899d3122" name="a75ce3f9a26ae328df39a9b6d899d3122"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75ce3f9a26ae328df39a9b6d899d3122">&#9670;&#160;</a></span>tblvRubricaInizialize()</h2>
+<a id="a917333f1ce91c1ce2e83539c5be2abd6" name="a917333f1ce91c1ce2e83539c5be2abd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917333f1ce91c1ce2e83539c5be2abd6">&#9670;&#160;</a></span>tblvContactsInizialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController.tblvRubricaInizialize </td>
+          <td class="memname">void it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController.tblvContactsInizialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

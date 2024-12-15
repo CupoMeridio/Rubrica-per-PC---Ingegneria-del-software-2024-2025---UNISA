@@ -12,10 +12,12 @@ import java.io.PrintWriter;
 import static java.lang.Thread.sleep;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 
 /**
@@ -62,7 +64,13 @@ public class Contactbook {
      * 
      */
     public void delete(Contact c){
-        contacts.remove(c);
+        Iterator<Contact> it = contacts.iterator();
+        while (it.hasNext()){
+            if (it.next()==c){
+                it.remove();
+                return;
+            }
+        }
     }
 
 

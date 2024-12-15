@@ -1,7 +1,7 @@
 var searchData=
 [
   ['getboolean_0',['getBoolean',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_duplicate_contact_view_controller.html#a2f6b3e1f3ebf1c73a21965444e20068a',1,'it::unisa::diem::team02::contactsbook::ui::controllers::DuplicateContactViewController']]],
-  ['getcontact_1',['getContact',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html#aa2888755009ae4486f5de4ae8fc2fac6',1,'it::unisa::diem::team02::contactsbook::database::Database']]],
+  ['getcontact_1',['getContact',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html#a915b4bbbef9853e964c358500c8dbe38',1,'it::unisa::diem::team02::contactsbook::database::Database']]],
   ['getcontacts_2',['getContacts',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contactbook.html#a2834071edc82652aaffbc33b683ac036',1,'it::unisa::diem::team02::contactsbook::model::Contactbook']]],
   ['getemail_3',['getEmail',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a8ae09f697ccb53df4929e59778022e23',1,'it.unisa.diem.team02.contactsbook.model.Contact.getEmail()'],['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_user.html#a6a775367d185221e3ae5a3498499c2a0',1,'it.unisa.diem.team02.contactsbook.model.User.getEmail()']]],
   ['getemaillist_4',['getEmailList',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a30abb7bd431a058b4a08777b44d53407',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],

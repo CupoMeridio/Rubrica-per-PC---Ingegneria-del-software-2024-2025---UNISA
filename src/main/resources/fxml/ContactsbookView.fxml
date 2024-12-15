@@ -43,7 +43,7 @@
          </children></AnchorPane>
     <AnchorPane fx:id="anchorBottom" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <TableView fx:id="tblvRubrica" layoutX="424.0" layoutY="188.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+            <TableView fx:id="tblvContacts" layoutX="424.0" layoutY="188.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
               <columns>
                 <TableColumn fx:id="clmSur" prefWidth="75.0" text="Surname" />
                 <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />

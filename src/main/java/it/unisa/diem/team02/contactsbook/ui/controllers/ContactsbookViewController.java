@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -82,7 +84,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private Button btnExport;
     @FXML
-    private TableView<Contact> tblvRubrica;
+    private TableView<Contact> tblvContacts;
     @FXML
     private TableColumn<Contact, String> clmSur;
     @FXML
@@ -109,11 +111,11 @@ public class ContactsbookViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tblvContactsInizialize();
         createList();
         btnMofidyInitialize();
         btnDeleteInitialize();
         initializeSearch();
-        tblvRubricaInizialize();
         mbtnFilter.setOnShown(event->{actionFilter();});
            
     }    
@@ -127,7 +129,7 @@ public class ContactsbookViewController implements Initializable {
      */
     public void createList(){
         sortedContacts= new SortedList<>(filter.getFlContacts());
-        tblvRubrica.setItems(sortedContacts);
+        tblvContacts.setItems(sortedContacts);
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
         clmName.setSortable(true);
@@ -137,7 +139,7 @@ public class ContactsbookViewController implements Initializable {
         clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
         clmName.setSortable(true);
         clmSur.setSortable(true);
-        sortedContacts.comparatorProperty().bind(tblvRubrica.comparatorProperty());
+        sortedContacts.comparatorProperty().bind(tblvContacts.comparatorProperty());
     }
     
 
@@ -159,15 +161,17 @@ public class ContactsbookViewController implements Initializable {
  * - La raccolta `contactbook` rimane coerente, contenente solo oggetti `Contact` validi.
  */
 
-    public void tblvRubricaInizialize(){
+    public void tblvContactsInizialize(){
 
         System.out.println("Sto recuperando i contatti");
         Database database = new Database();
-        TreeMap<String, Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
-        for (Contact c : listaContatti.values()){
+        ArrayList<Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
+        System.out.println("Lista 1:"+listaContatti);
+        Collections.sort(listaContatti);
+        for (Contact c : listaContatti){
             contactbook.add(c);    
         }
-        System.out.println(listaContatti);
+        System.out.println("Lista 2:"+listaContatti);
     }
     
 /**
@@ -202,7 +206,14 @@ public class ContactsbookViewController implements Initializable {
               
               newStage.initModality(Modality.WINDOW_MODAL);
               newStage.initOwner(btnAdd.getScene().getWindow());
-              newStage.showAndWait(); 
+              newStage.showAndWait();
+              try{
+                TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
+                tblvContacts.getSortOrder().clear();
+                tblvContacts.getSortOrder().add(c);
+              } catch (Exception ex){
+                  tblvContacts.getSortOrder().add(clmSur);
+              }
     }
     
 /**
@@ -242,19 +253,26 @@ public class ContactsbookViewController implements Initializable {
               newStage.initOwner(btnModify.getScene().getWindow());
               newStage.show();
               
-              Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+              Contact selectedContact = tblvContacts.getSelectionModel().getSelectedItem();
               
             
               
               modifyC.setContactbook(contactbook);
               modifyC.setContact(selectedContact);
+              try{
+                TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
+                tblvContacts.getSortOrder().clear();
+                tblvContacts.getSortOrder().add(c);
+              } catch (Exception ex){
+                  tblvContacts.getSortOrder().add(clmSur);
+              }
     }
     
 /**
  * @brief Inizializza il comportamento del bottone di modifica.
  * 
  * Questo metodo imposta lo stato del bottone di modifica (btnModify) su disabilitato. 
- * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (tblvRubrica). Quando 
+ * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (tblvContacts). Quando 
  * viene selezionato un contatto, il bottone di modifica viene abilitato; se nessun contatto è 
  * selezionato, il bottone viene disabilitato.
  * 
@@ -263,7 +281,7 @@ public class ContactsbookViewController implements Initializable {
     public void btnMofidyInitialize(){
         btnModify.setDisable(true);
 
-        tblvRubrica.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
+        tblvContacts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
             @Override
             public void changed(ObservableValue<? extends Contact> observable, Contact oldValue, Contact newValue) {
                 btnModify.setDisable(newValue == null);
@@ -275,7 +293,7 @@ public class ContactsbookViewController implements Initializable {
  * @brief Inizializza il comportamento del bottone di eliminazione.
  * 
  * Questo metodo imposta lo stato del bottone di eliminazione (btnDelete) su disabilitato. 
- * Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvRubrica). Quando
+ * Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvContacts). Quando
  * viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto 
  * è selezionato, il bottone viene disabilitato.
  * 
@@ -288,7 +306,7 @@ public class ContactsbookViewController implements Initializable {
     public void btnDeleteInitialize(){
         btnDelete.setDisable(true);
 
-        tblvRubrica.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
+        tblvContacts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
             @Override
             public void changed(ObservableValue<? extends Contact> observable, Contact oldValue, Contact newValue) {
                 btnDelete.setDisable(newValue == null);
@@ -314,7 +332,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private void actionDelete(ActionEvent event) {
         Database database = new Database ();
-        Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+        Contact selectedContact = tblvContacts.getSelectionModel().getSelectedItem();
         try {
             database.removeContactByID(Database.connection, "contatti", selectedContact.getID(), Database.user.getEmail());
         } catch (SQLException ex){
@@ -326,13 +344,13 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Applica un filtro alla lista di contatti mostrata nella tabella in funizone di una tag selezionato.
  *
- * Questo metodo imposta la lista filtrata FilteredList di contatti sulla tabella tblvRubrica 
+ * Questo metodo imposta la lista filtrata FilteredList di contatti sulla tabella tblvContacts 
  * e aggiunge dei listener alle checkbox (chkmHome, chkmJob, chkmUni) per aggiornare il filtro
  * ogni volta che una di queste viene selezionata o deselezionata. Ogni cambio di stato nelle checkbox
  * farà chiamare il metodo updateFilter di filter per aggiornare la visualizzazione della lista dei contatti.
  *
  * @pre La lista filtrata deve essere stata inzizializzata.
- * @pre La tabella tblvRubrica deve essere inizializzata correttamente.
+ * @pre La tabella tblvContacts deve essere inizializzata correttamente.
  * @post La lista filtrata viene modificata in funzione dei tag selezionati.
  * 
  * @invariant non viene rimosso il filtro fornito da initializeSearch()
@@ -366,7 +384,7 @@ public class ContactsbookViewController implements Initializable {
     * 
     * 
     * @pre La lista filtrata deve essere inizializzata correttamente.
-    * @pre La tabella tblvRubrica deve essere inizializzata correttamente.
+    * @pre La tabella tblvContacts deve essere inizializzata correttamente.
     * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
     *   sottostringa inserita nella barra di ricerca.
     *
@@ -414,7 +432,7 @@ public class ContactsbookViewController implements Initializable {
         fileChooser.setTitle("Apri un file");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
 
-        Window window = tblvRubrica.getScene().getWindow();
+        Window window = tblvContacts.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(window);
         
         if (selectedFile!=null)
@@ -428,6 +446,13 @@ public class ContactsbookViewController implements Initializable {
                         System.out.println("Rilevato contatto duplicato: " + c);
                     }
                 
+                try{
+                    TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
+                    tblvContacts.getSortOrder().clear();
+                    tblvContacts.getSortOrder().add(c);
+                } catch (Exception ex){
+                    tblvContacts.getSortOrder().add(clmSur);
+                }
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Operation completed");
                 alert.setHeaderText("");
@@ -460,7 +485,7 @@ public class ContactsbookViewController implements Initializable {
         fileChooser.setTitle("Scegli un file in cui salvare");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
      
-        Window window = (tblvRubrica.getParent().getScene().getWindow());
+        Window window = (tblvContacts.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
         
         if (selectedFile!=null)
