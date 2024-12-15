@@ -193,9 +193,9 @@ public class DatabaseTest {
         System.out.println("getContact");
         String tableName = "contatti";
         
-        TreeMap<String,Contact> result = db.getContact(conn, tableName, email_utente); // CAMBIATO PER TREESET
+        ArrayList<Contact> result = db.getContact(conn, tableName, email_utente); // CAMBIATO PER TREESET
         // assertTrue(result.containsKey(cont.getID()));
-         Contact cont_result= result.get(cont.getID());
+         Contact cont_result= result.get(result.size()-1);
         assertEquals(cont_result.getID(),cont.getID());
     }
 
@@ -213,8 +213,8 @@ public class DatabaseTest {
         number.add("numero cambiato");
         cont.setNumber(number);
         db.modifyContact(conn, tableName, cont, email_utente);
-        TreeMap<String,Contact> result=db.getContact(conn, tableName, email_utente);// CAMBIATO DA HASH MAP
-        Contact cont_result= result.get(cont.getID());
+        ArrayList<Contact> result=db.getContact(conn, tableName, email_utente);// CAMBIATO DA HASH MAP
+        Contact cont_result= result.get(result.size()-1);
         assertNotNull(cont_result);
         assertEquals(cont.getNumberList().size(),cont_result.getNumberList().size());
         for(int i=0; i<cont_result.getNumberList().size(); i++){
@@ -232,7 +232,7 @@ public class DatabaseTest {
         String tableName = "contatti";
         db.removeContactByID(conn, tableName, cont.getID(), email_utente);
         //Map <String,Contact>table=  new HashMap();
-        TreeMap<String,Contact> table= new TreeMap<>();
+        ArrayList<Contact> table= new ArrayList<>();
         assertEquals(table,db.getContact(conn, tableName, email_utente));
     }
 

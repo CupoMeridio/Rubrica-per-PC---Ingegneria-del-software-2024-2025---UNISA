@@ -12,7 +12,7 @@ class App {
 class Database {
     + Connection connectDB(String dbname, String user, String password)
     + void insertUser(Connection conn, String tableName, String email, String password)    
-    + HashMap<String, Contact> getUser(Connection conn, String tablename)
+    + HashMap<String, String> getUser(Connection conn, String tablename)
     + int checkLogin(Connection conn,String tableName, String email, String password)
     + {static} String hashPassword(String password)
     + {static} boolean checkPassword(String password, String hashed)
@@ -235,7 +235,7 @@ class ContactsbookViewController {
     - TableColumn<Contact, String> clmSur
     - TableColumn<Contact, String> clmEmail
     - TableColumn<Contact, String> clmNum
-    - TableColumn<Contact, String> clmTag
+    - TableColumn<Contact, Tag> clmTag
     - TextField txtSearch
     - MenuButton mbtnFilter
     - CheckMenuItem chkmHome

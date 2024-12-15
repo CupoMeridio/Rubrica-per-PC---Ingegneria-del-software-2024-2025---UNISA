@@ -113,9 +113,9 @@ Membri pubblici</h2></td></tr>
 <tr class="memitem:a71992a2d726f6ab42ab018c397590918" id="r_a71992a2d726f6ab42ab018c397590918"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71992a2d726f6ab42ab018c397590918">checkLogin</a> (Connection conn, String tableName, String email, String password)  throws SQLException</td></tr>
 <tr class="memdesc:a71992a2d726f6ab42ab018c397590918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica le credenziali di login di un utente.  <br /></td></tr>
 <tr class="separator:a71992a2d726f6ab42ab018c397590918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2888755009ae4486f5de4ae8fc2fac6" id="r_aa2888755009ae4486f5de4ae8fc2fac6"><td class="memItemLeft" align="right" valign="top">TreeMap&lt; String, <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2888755009ae4486f5de4ae8fc2fac6">getContact</a> (Connection conn, String tableName, String email)</td></tr>
-<tr class="memdesc:aa2888755009ae4486f5de4ae8fc2fac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera i contatti associati a un utente specifico.  <br /></td></tr>
-<tr class="separator:aa2888755009ae4486f5de4ae8fc2fac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915b4bbbef9853e964c358500c8dbe38" id="r_a915b4bbbef9853e964c358500c8dbe38"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a915b4bbbef9853e964c358500c8dbe38">getContact</a> (Connection conn, String tableName, String email)</td></tr>
+<tr class="memdesc:a915b4bbbef9853e964c358500c8dbe38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera i contatti associati a un utente specifico.  <br /></td></tr>
+<tr class="separator:a915b4bbbef9853e964c358500c8dbe38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfd11897bef4469a6a4637b48cbe255d" id="r_abfd11897bef4469a6a4637b48cbe255d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfd11897bef4469a6a4637b48cbe255d">insertContact</a> (Connection conn, String tableName, <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> cont, String email_Utente)  throws SQLException</td></tr>
 <tr class="memdesc:abfd11897bef4469a6a4637b48cbe255d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserisce il contatto associato ad un utente specifico.  <br /></td></tr>
 <tr class="separator:abfd11897bef4469a6a4637b48cbe255d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,8 +175,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Verifica le credenziali di login di un utente. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null, tableName deve esistere nel database connesso, l' email inserita deve esser valida, la password non può essere vuota o nulla </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>viene restituito un intero uguale a 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn, tableName, email, password</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>viene restituito un intero uguale a 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">conn</td><td>Oggetto Connection per interagire con il database. </td></tr>
@@ -257,8 +256,7 @@ Attributi pubblici statici</h2></td></tr>
 <p>Variabile statica che memorizza l'utente attualemnet collegato. </p>
 <p>Stabilisce una connessione al database PostgreSQL.</p>
 <dl class="section pre"><dt>Precondizione</dt><dd>i parametri passati devono essere quelli di una tabella esistente in un database con un propretario e lacorrispettiva password </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>la connessione viene stabilita </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>dbname, user, password</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>la connessione viene stabilita</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">dbname</td><td>Nome del database a cui connettersi. </td></tr>
@@ -271,14 +269,14 @@ Attributi pubblici statici</h2></td></tr>
 
 </div>
 </div>
-<a id="aa2888755009ae4486f5de4ae8fc2fac6" name="aa2888755009ae4486f5de4ae8fc2fac6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2888755009ae4486f5de4ae8fc2fac6">&#9670;&#160;</a></span>getContact()</h2>
+<a id="a915b4bbbef9853e964c358500c8dbe38" name="a915b4bbbef9853e964c358500c8dbe38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a915b4bbbef9853e964c358500c8dbe38">&#9670;&#160;</a></span>getContact()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">TreeMap&lt; String, <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> &gt; it.unisa.diem.team02.contactsbook.database.Database.getContact </td>
+          <td class="memname">ArrayList&lt; <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> &gt; it.unisa.diem.team02.contactsbook.database.Database.getContact </td>
           <td>(</td>
           <td class="paramtype">Connection</td>          <td class="paramname"><span class="paramname"><em>conn</em></span>, </td>
         </tr>
@@ -297,8 +295,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Recupera i contatti associati a un utente specifico. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>la password!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e deve essere di un utente registrato </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>restituisce una TreeMap con chiave ID del Contact e come valore il Contact </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn,tableName, email</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>restituisce una TreeMap con chiave ID del Contact e come valore il Contact</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">conn</td><td>Oggetto Connection per interagire con il database. </td></tr>
@@ -333,8 +330,7 @@ Attributi pubblici statici</h2></td></tr>
 <p>Conta il numero di righe della tabella tableName associata al <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html" title="Classe che implementa tutti i metodi per comunicare con il database.">Database</a>. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null, tableName!=null e deve appartenere al <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html" title="Classe che implementa tutti i metodi per comunicare con il database.">Database</a> </dd></dl>
 <dl class="section post"><dt>Postcondizione</dt><dd>vengono contate il numero di righe della tabella <br  />
- </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn, tableName</dd></dl>
+</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">conn</td><td>Oggetto Connection per interagire con il database. </td></tr>
@@ -367,8 +363,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Recupera tutti gli utenti dal database. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null, tableName deve esistere nel database connesso </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>viene restituita una Hashmap con chiave email e valore la password cryptata </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn, tableName</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>viene restituita una Hashmap con chiave email e valore la password cryptata</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">conn</td><td>Oggetto Connection per interagire con il database. </td></tr>
@@ -411,8 +406,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Inserisce il contatto associato ad un utente specifico. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null,tableName deve esistere nel database connesso, cont!= null, email_Utente deve essere valida e registrata nel DataBase </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>inserisce il contatto con tutti i rispettivi attributi nella tabella che ha come chiave primaria composta l' ID e l' email_Utente </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn,tableName,cont,email_Utente</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>inserisce il contatto con tutti i rispettivi attributi nella tabella che ha come chiave primaria composta l' ID e l' email_Utente</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">cont</td><td>contatto da aggiungere </td></tr>
@@ -462,8 +456,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Inserisce un nuovo utente nella tabella specificata. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e diversa da altre email nel database, la password non può essere vuota o nulla </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>viene salvato nella tableName l' email associata allapassword criptata </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn,email, tableName</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>viene salvato nella tableName l' email associata allapassword criptata</dd></dl>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">conn</td><td>Oggetto Connection per interagire con il database. </td></tr>
@@ -513,8 +506,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Modifica il contatto associato a un utente specifico nel <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1database_1_1_database.html" title="Classe che implementa tutti i metodi per comunicare con il database.">Database</a>. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null,tableName deve esistere nel database connesso, cont!= null, il contatto deve essere già presente e deve esser gia associato a email_Utente, email_Utente deve essere valida e registrata nel DataBase </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>aggiorna la tabella tableName modificando i campi cambiati di cont </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn,tableName,cont,email_Utente</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>aggiorna la tabella tableName modificando i campi cambiati di cont</dd></dl>
 <p>Modifica un contatto se è gia presente ed associato a email_Utente, in caso contrario aggiungerà il contatto come nuovo</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
@@ -565,8 +557,7 @@ Attributi pubblici statici</h2></td></tr>
 
 <p>Rimuove un record dalla tabella specificata utilizzando l'ID. Questo metodo esegue un'operazione di eliminazione (<code>DELETE</code>) su una tabella di un database, rimuovendo il record che corrisponde all'ID specificato. </p>
 <dl class="section pre"><dt>Precondizione</dt><dd>conn!= null,tableName deve esistere nel database connesso, ID non deve essere vuoto o nullo e deve esser associato ad un contatto ,email deve essere valida e registrata nel DataBase </dd></dl>
-<dl class="section post"><dt>Postcondizione</dt><dd>viene eliminato il contatto associato all' ID e all' email </dd></dl>
-<dl class="section invariant"><dt>Invariante</dt><dd>conn,tableName,ID,email</dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>viene eliminato il contatto associato all' ID e all' email</dd></dl>
 <p>Rimuove un record dalla tabella specificata utilizzando l'ID, se l' ID non è associato a nessun contatto di email la tabella non verra modificata</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">

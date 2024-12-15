@@ -34,7 +34,6 @@ public class Database  {
  * 
  * @pre i parametri passati devono essere quelli di una tabella esistente in un database con un propretario e lacorrispettiva password
  * @post la connessione viene stabilita
- * @invariant dbname, user, password
  * 
  * @param dbname Nome del database a cui connettersi.
  * @param user Nome del possessore del database in pgAdmin.
@@ -44,7 +43,7 @@ public class Database  {
     public Connection ConnectionDB(String dbname, String user, String password) {
         Connection conn=null;
         
-       
+        
         try {
             Class.forName("org.postgresql.Driver");
             System.out.print("Driver trovato ");
@@ -71,7 +70,6 @@ public class Database  {
     * 
     * @pre conn!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e diversa da altre email nel database, la password non può essere vuota o nulla
     * @post viene salvato nella tableName l' email associata allapassword criptata
-    * @invariant conn,email, tableName
     * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
@@ -100,7 +98,6 @@ public class Database  {
     * 
     * @pre conn!= null, tableName deve esistere nel database connesso
     * @post viene restituita una Hashmap con chiave email e valore la password cryptata
-    * @invariant conn, tableName
     * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
@@ -144,7 +141,6 @@ public class Database  {
     * 
     * @pre conn!= null, tableName deve esistere nel database connesso, l' email inserita deve esser valida, la password non può essere vuota o nulla
     * @post viene restituito un intero uguale a 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste
-    * @invariant conn, tableName, email, password
     * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
@@ -195,7 +191,6 @@ public class Database  {
     * 
     * @pre  la password non può essere vuota o nulla
     * @post viene criptata la password inserita
-    * @invariant  password
     * 
     * @param password è la password da criptare
     * @return  Una stringa criptata
@@ -212,7 +207,6 @@ public class Database  {
     * 
     * @pre  la password!= null
     * @post restituisce il risultato del confronto tra le 2 stringhe
-    * @invariant  password, hashed
     * 
     * 
     * @param password è la password non criptata passata alla funzione 
@@ -234,7 +228,6 @@ public class Database  {
     * 
     * @pre  la password!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e deve essere di un utente registrato
     * @post restituisce una TreeMap con chiave ID del Contact e come valore il Contact
-    * @invariant  conn,tableName, email
     * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
@@ -244,13 +237,13 @@ public class Database  {
     */
 
     
-   public TreeMap<String, Contact> getContact(Connection conn, String tableName,String email){
+   public ArrayList<Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;
-        Map <String, Contact>table=null;
+        ArrayList<Contact>table=null;
         try {
-            table =  new TreeMap<>();
+            table =  new ArrayList<>();
             String query= String.format("select * from %s where email='%s'", tableName,email);
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
@@ -261,14 +254,14 @@ public class Database  {
                 String tag = rs.getString("tag");
                 String em_cont = rs.getString("email_contact");
                 String ID = rs.getString("id");
-                table.put(ID, createContact(name,surname,numeri,tag,em_cont,ID));
+                table.add(createContact(name,surname,numeri,tag,em_cont,ID));
             }
             statement.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        return (TreeMap<String, Contact>) table;
+        return (ArrayList<Contact>) table;
     }
     
     /**
@@ -277,7 +270,6 @@ public class Database  {
     * 
     * @pre  ID non nullo
     * @post crea un contatto che 
-    * @invariant   name, surname, numeri,  tag,  em_cont, ID
     * 
     * @param name nome del contatto.
     * @param surname cognome del contatto.
@@ -330,7 +322,6 @@ public class Database  {
     * 
     * @pre  conn!= null,tableName deve esistere nel database connesso, cont!= null, email_Utente deve essere valida e registrata nel DataBase 
     * @post inserisce il contatto con tutti i rispettivi attributi nella tabella che ha come chiave primaria composta l' ID e l' email_Utente
-    * @invariant  conn,tableName,cont,email_Utente
     * 
     * 
     * 
@@ -382,7 +373,7 @@ public class Database  {
     * 
     * @pre  s non può essere vuota o nulla  
     * @post crea una stringa con un separatore 
-    * @invariant  s
+    * @invariant  i valori di s preesistenti non vengono modificati 
     * 
     * 
     * Questo metodo prende in ingresso una lista di stringhe e restituisce 
@@ -409,7 +400,6 @@ public class Database  {
     * 
     * @pre  conn!= null,tableName deve esistere nel database connesso, cont!= null, il contatto deve essere già presente e deve esser gia associato a email_Utente, email_Utente deve essere valida e registrata nel DataBase 
     * @post aggiorna la tabella tableName modificando i campi cambiati di cont
-    * @invariant  conn,tableName,cont,email_Utente
     * 
     * Modifica un contatto se è gia presente ed associato a email_Utente, in caso contrario aggiungerà il contatto come nuovo
     * 
@@ -462,7 +452,6 @@ public class Database  {
     * 
     * @pre  conn!= null,tableName deve esistere nel database connesso, ID non deve essere vuoto o nullo e deve esser associato ad un contatto ,email deve essere valida e registrata nel DataBase 
     * @post viene eliminato il contatto associato all' ID e all' email 
-    * @invariant  conn,tableName,ID,email
     * 
     * Rimuove un record dalla tabella specificata utilizzando l'ID, se l' ID non è associato a nessun contatto di email la tabella non verra modificata
     * 
@@ -507,7 +496,6 @@ public class Database  {
     * @brief Conta il numero di righe della tabella tableName associata al Database
     * @pre  conn!= null, tableName!=null e deve appartenere al Database
     * @post vengono contate il numero di righe della tabella  
-    * @invariant conn, tableName
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName nome della tabella dal quale prendere le informazioni
