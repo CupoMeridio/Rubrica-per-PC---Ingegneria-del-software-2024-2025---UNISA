@@ -106,7 +106,7 @@ public class ContactsbookViewController implements Initializable {
  * @post Gli elementi dell'interfaccia sono stati configurati correttamente e la lista è pronta per l'uso.
  * @invariant La lista di contatti viene creata e popolata, i bottoni di modifica e cancellazione sono abilitati e la ricerca è configurata.
  * 
- * @see createList(), initializeList(), btnModifyInitialize(), btnDeleteInitialize(), initializeSearch()
+ * @see createList(), tblvContactsInizialize(), btnModifyInitialize(), btnDeleteInitialize(), initializeSearch()
  */
     
     @Override
