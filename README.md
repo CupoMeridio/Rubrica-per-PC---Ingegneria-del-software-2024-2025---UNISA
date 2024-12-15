@@ -40,6 +40,6 @@ Configurare il database:
 L'applicazione utilizza un database online tramite i servizi offerti da https://aiven.io, pertanto non è necessario configurare obbligatoriamente un database locale.
 Dati però i frequenti problemi della piattaforma, è possibile configurare il programma per funzionare con un database locale:
 - Scaricare PostgreSQL -> https://www.postgresql.org
-- Aprire pgAdmin4 -> Servers -> tasto destro su PostgreSQL 17 -> Create -> Database.
-  Impostare "rubrica" come nome del database e "postgres" come Owner.
+- Aprire pgAdmin4 -> Servers -> tasto destro su PostgreSQL 17 -> Create -> Database. <br />
+  Impostare "rubrica" come nome del database e "postgres" come Owner. <br />
   Tasto destro sul database appena creato -> Backup -> selezionare il file rubrica.sql e confermare
