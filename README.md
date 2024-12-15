@@ -36,7 +36,7 @@ Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso 
 ```bash
 git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 ```
-Configurare il database:
+**Configurare il database**
 L'applicazione utilizza un database online tramite i servizi offerti da https://aiven.io, pertanto non è necessario configurare obbligatoriamente un database locale.
 Dati però i frequenti problemi della piattaforma, è possibile configurare il programma per funzionare con un database locale:
 - Scaricare PostgreSQL -> https://www.postgresql.org
