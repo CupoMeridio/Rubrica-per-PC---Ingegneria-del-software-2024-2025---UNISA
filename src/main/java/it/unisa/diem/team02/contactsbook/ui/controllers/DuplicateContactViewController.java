@@ -85,7 +85,6 @@ public class DuplicateContactViewController implements Initializable {
  * @pre La variabile `b` deve essere stata precedentemente impostata tramite uno dei metodi
  *      che gestiscono l'interazione dell'utente (`actionYes` o `actionNo`).
  * @post Il valore di `b` rimane invariato, restituendo semplicemente il valore corrente.
- * @invariant Il valore di `b` rimarrà coerente con la scelta dell'utente.
  * 
  * @return Il valore della variabile booleana `b`.
  */

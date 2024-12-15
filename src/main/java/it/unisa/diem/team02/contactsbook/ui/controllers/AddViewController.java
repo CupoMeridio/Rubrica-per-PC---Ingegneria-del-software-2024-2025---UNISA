@@ -164,7 +164,7 @@ public class AddViewController implements Initializable {
  * 
  * @details
  * - I dati vengono estratti dai campi di testo `txtName`, `txtSur`, `txtNumber1`, `txtNumber2`, 
- *   `txtNumber3`, `txtEmail1`, `txtEmail2`, `txtEmail3` e dai textBox.
+ *   `txtNumber3`, `txtEmail1`, `txtEmail2`, `txtEmail3` e dai checkBox.
  * - Se un campo di numero o email è vuoto, non viene aggiunto al contatto.
  * - Se una checkbox dei tag non è selezionata, non viene aggiunto un tag.
  * - In caso di duplicato, viene caricata la vista `DuplicateContactView.fxml`, e l'utente 

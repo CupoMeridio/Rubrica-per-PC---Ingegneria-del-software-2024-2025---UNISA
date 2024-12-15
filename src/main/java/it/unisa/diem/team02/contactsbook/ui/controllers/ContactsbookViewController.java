@@ -155,8 +155,6 @@ public class ContactsbookViewController implements Initializable {
  * @post
  * - Tutti i contatti recuperati dal database vengono aggiunti alla raccolta `contactbook`.
  *
- * @invariant
- * - La raccolta `contactbook` rimane coerente, contenente solo oggetti `Contact` validi.
  */
 
     public void tblvContactsInizialize(){
@@ -293,9 +291,6 @@ public class ContactsbookViewController implements Initializable {
  * viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto 
  * è selezionato, il bottone viene disabilitato.
  * 
- * @details Il bottone di eliminazione permette all'utente di eliminare un contatto dalla rubrica. 
- * Tuttavia, il bottone è disabilitato quando non è selezionato alcun contatto, impedendo azioni non desiderate.
- * 
  * @post Il bottone di eliminazione sarà disabilitato finché non viene selezionato un contatto nella tabella.
  */
     
@@ -375,8 +370,6 @@ public class ContactsbookViewController implements Initializable {
  * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti. La ricerca viene eseguita
  * su tutti i campi eccetto il campo tag.
  *
- * 
- * 
  * @pre La lista filtrata deve essere inizializzata correttamente.
  * @pre La tabella tblvContacts deve essere inizializzata correttamente.
  * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
@@ -505,7 +498,6 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @pre L'utente deve aver effettuato l'accesso.
  * @post La schermata attuale viene cambiata con la vista di login e la connessione con il database viene interrotta.
- * @invariant Nessuna modifica permanente ai dati dell'utente o allo stato dell'applicazione.
  * 
  * @see App#setRoot(String)
  */

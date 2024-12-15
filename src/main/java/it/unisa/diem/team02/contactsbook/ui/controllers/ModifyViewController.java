@@ -186,9 +186,6 @@ public class ModifyViewController implements Initializable {
  * - I valori del contatto passato vengono impostati nei rispettivi campi di testo (nome, cognome, numeri di telefono, email).
  * - Se un numero di telefono, una email o un tag è presente, verrà separato nei vari campi di input.
  * 
- * @invariant
- * - I campi di testo (txtName, txtSur, txtNumber1, txtNumber2, txtNumber3, txtEmail1, txtEmail2, txtEmail3, chkmHome, 
- * chkmUni, chkmJob) devono essere correttamente aggiornati con i dati del contatto.
  * 
  * @see Contact#getName()
  * @see Contact#getSurname()
@@ -271,9 +268,6 @@ public void setContact(Contact contact) {
  * - Se il contatto non è un duplicato, il contatto precedente viene sostituito con quello modificato.
  * - Se il contatto è un duplicato, viene mostrata una finestra di dialogo per confermare o annullare la modifica.
  * 
- * @invariant
- * - La lista `contacts` rimane consistente, senza duplicati, dopo la modifica del contatto.
- * - I numeri di telefono e le email devono essere aggiunti solo se non vuoti.
  */
     @FXML
 private void actionModify(ActionEvent event) throws IOException {
