@@ -104,7 +104,6 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @pre La scena e gli elementi dell'interfaccia utente devono essere già stati caricati.
  * @post Gli elementi dell'interfaccia sono stati configurati correttamente e la lista è pronta per l'uso.
- * @invariant La lista di contatti viene creata e popolata, i bottoni di modifica e cancellazione sono abilitati e la ricerca è configurata.
  * 
  * @see createList(), tblvContactsInizialize(), btnModifyInitialize(), btnDeleteInitialize()
  */
@@ -125,7 +124,6 @@ public class ContactsbookViewController implements Initializable {
      * 
      * @pre La tabella e le colonne devono essere già configurate nell'interfaccia utente.
      * @post La  tabella è configurata per visualizzare i dati.
-     * @invariant La tabella visualizzerà correttamente i contatti con i dettagli impostati nelle rispettive colonne.
      */
     public void createList(){
         sortedContacts= new SortedList<>(filter.getFlContacts());
@@ -186,7 +184,6 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @pre La scena corrente deve contenere il bottone di aggiunta per attivare questa azione.
  * @post Viene mostrata una nuova finestra con la possibilità di aggiungere un nuovo contatto alla lista.
- * @invariant La nuova finestra è una finestra modale e non permette di interagire con la finestra principale fino alla sua chiusura.
  * 
  * @see AddViewController
  */
@@ -231,7 +228,6 @@ public class ContactsbookViewController implements Initializable {
  * selezionato dalla lista.
  * @post Viene mostrata una nuova finestra con le informazioni del contatto selezionato, pronto 
  * per essere modificato.
- * @invariant La finestra di modifica è una finestra modale e non permette di interagire con la finestra principale fino alla sua chiusura.
  * 
  * @see ModifyViewController
  */
@@ -352,8 +348,6 @@ public class ContactsbookViewController implements Initializable {
  * @pre La lista filtrata deve essere stata inzizializzata.
  * @pre La tabella tblvContacts deve essere inizializzata correttamente.
  * @post La lista filtrata viene modificata in funzione dei tag selezionati.
- * 
- * @invariant non viene rimosso il filtro fornito da initializeSearch()
  *
  * 
  * @see Filter
@@ -387,8 +381,6 @@ public class ContactsbookViewController implements Initializable {
  * @pre La tabella tblvContacts deve essere inizializzata correttamente.
  * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
  *   sottostringa inserita nella barra di ricerca.
- *
- * @invariant non viene rimosso il filtro da actionFilter()
  * @see Filter
  */
     private void initializeSearch() {
@@ -512,7 +504,7 @@ public class ContactsbookViewController implements Initializable {
  *           In caso di errore durante il caricamento della vista, viene loggato un errore.
  * 
  * @pre L'utente deve aver effettuato l'accesso.
- * @post La schermata attuale viene cambiata con la vista di login.
+ * @post La schermata attuale viene cambiata con la vista di login e la connessione con il database viene interrotta.
  * @invariant Nessuna modifica permanente ai dati dell'utente o allo stato dell'applicazione.
  * 
  * @see App#setRoot(String)
