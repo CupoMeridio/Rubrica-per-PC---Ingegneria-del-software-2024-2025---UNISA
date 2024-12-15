@@ -230,7 +230,7 @@ class ContactsbookViewController {
     - AnchorPane anchorUp
     - AnchorPane anchorBottom
     - HBox hboxButton
-    - TableView<Contact> tblvRubrica
+    - TableView<Contact> tblvContacts
     - TableColumn<Contact, String> clmName
     - TableColumn<Contact, String> clmSur
     - TableColumn<Contact, String> clmEmail
@@ -252,7 +252,7 @@ class ContactsbookViewController {
     - SortedList<Contact> sortedContacts
     --
     + void createList()
-    + void initializeList()
+    + void tblvContactsInitialize()
     + void actionAdd(ActionEvent event)
     + void actionModify(ActionEvent event)
     + void btnModifyInitialize()
