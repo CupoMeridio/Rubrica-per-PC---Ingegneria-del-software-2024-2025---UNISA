@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📒_20rubrica_20per_20pc_0',['📒 Rubrica per PC',['../index.html',1,'']]]
+  ['📋_20funzionalità_20principali_0',['📋 Funzionalità Principali',['../index.html#autotoc_md5',1,'']]]
 ];
