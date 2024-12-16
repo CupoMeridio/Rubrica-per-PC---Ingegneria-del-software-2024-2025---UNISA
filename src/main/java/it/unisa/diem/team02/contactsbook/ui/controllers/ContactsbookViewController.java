@@ -467,6 +467,7 @@ public class ContactsbookViewController implements Initializable {
         fileChooser.setTitle("Scegli un file in cui salvare");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
      
+        
         Window window = (tblvContacts.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
         
