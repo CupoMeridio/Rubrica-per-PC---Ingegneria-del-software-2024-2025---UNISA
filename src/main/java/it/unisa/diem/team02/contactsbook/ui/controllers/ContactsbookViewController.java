@@ -417,9 +417,11 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
+                int primaSize=contactbook.getContacts().size();
                 contactbook.loadFromFile(selectedFile);
-                System.out.println(contactbook.getContacts());
-                for(Contact c : contactbook.getContacts())
+                int secondaSize=contactbook.getContacts().size();
+                System.out.println(contactbook.getContacts().subList(primaSize,secondaSize));
+                for(Contact c : contactbook.getContacts().subList(primaSize,secondaSize))
                 try {
                         database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
                     } catch (SQLException ex) {
