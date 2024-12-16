@@ -39,3 +39,8 @@ git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 **Configurare il database:**
 L'applicazione utilizza un database online tramite i servizi offerti da https://aiven.io, pertanto non è necessario configurare un database locale.<br />
 
+**Comando per aprire il programma**
+Aprire il terminale nella cartella del progetto e digitare
+```
+java --module-path javafx-sdk-23.0.1\lib --add-modules javafx.controls,javafx.fxml -jar target/Rubrica_progetto_IDS-1.0-SNAPSHOT.jar
+```
