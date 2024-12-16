@@ -217,7 +217,7 @@ public class Contactbook {
                 String campi []=line.split(";",-1);
                 Contact c=new Contact(campi[0], campi[1]);
                 try {
-                    sleep(3000); //diamo il tempo di generare un id univoco valido per il contatto
+                    sleep(500); //diamo il tempo di generare un id univoco valido per il contatto
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Contactbook.class.getName()).log(Level.SEVERE, null, ex);
                 }
