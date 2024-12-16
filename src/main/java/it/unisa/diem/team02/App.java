@@ -103,7 +103,7 @@ public class App extends Application {
  * - L'applicazione JavaFX viene avviata, e il metodo `start(Stage stage)` viene invocato per configurare e mostrare la finestra principale.
  * 
  */
-    public static void main() {
+    public static void main(String[] args) {
         launch();
     }
 }
