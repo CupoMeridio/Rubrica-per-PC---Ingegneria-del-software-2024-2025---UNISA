@@ -1,4 +1,3 @@
-
 package it.unisa.diem.team02.contactsbook.database;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
@@ -9,14 +8,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -26,13 +22,13 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author team02
  */
 public class Database  {
-    static public Connection connection; ///Variabile statica che memorizza lo stato della connesione con il database
+    static public Connection connection; ///Variabile statica che memorizza lo stato della connessione con il database
     static public User user; ///Variabile statica che memorizza l'utente attualemnet collegato
 /**
  * 
  * @brief Stabilisce una connessione al database PostgreSQL.
  * 
- * @pre i parametri passati devono essere quelli di una tabella esistente in un database con un propretario e lacorrispettiva password
+ * @pre i parametri passati devono essere quelli di una tabella esistente in un database con un propretario e la corrispettiva password
  * @post la connessione viene stabilita
  * 
  * @param dbname Nome del database a cui connettersi.
@@ -41,25 +37,15 @@ public class Database  {
  * @return Oggetto Connection se la connessione è riuscita, altrimenti null.
  */
     public Connection ConnectionDB(String dbname, String user, String password) {
-        Connection conn=null;
-        
-        
         try {
             Class.forName("org.postgresql.Driver");
-            System.out.print("Driver trovato ");
-              conn= DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password); //connessione database online
-            //conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password); //Conessione database offline
-            if(conn!=null){
-                System.out.println("Connessione Stabilita");
-            }else{
-                System.out.println("Connessione Fallita");
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            String url = String.format("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/%s?ssl=require&user=%s&password=%s", dbname, user, password);
+            connection = DriverManager.getConnection(url);
+            System.out.println(connection != null ? "Connessione Stabilita" : "Connessione Fallita");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore di connessione al database", ex);
         }
-           return conn;
+        return connection;
     }
     
     
@@ -76,24 +62,22 @@ public class Database  {
     * @param tableName Nome della tabella in cui inserire l'utente.
     * @param email Email dell'utente.
     * @param password Password dell'utente (verrà criptata  prima dell'inserimento).
-    * @throws SQLException Se si verifica un errore durante l'inserimento.
     * 
     */
 
-    public void insertUser(Connection conn, String tableName, String email, String password) throws SQLException{
-    
-           Statement statment;
-           String pass= hashPassword(password);
-           String query= String.format("insert into %s(email,password) values('%s','%s');",tableName, email, pass);
-           statment= conn.createStatement();
-           statment.executeUpdate(query);
-           System.out.println("Utente inserito");
-           statment.close();
-        
+    public void insertUser(Connection conn, String tableName, String email, String password) {
+        String query = String.format("INSERT INTO %s (email, password) VALUES (?, ?);", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, email);
+            pstmt.setString(2, hashPassword(password));
+            pstmt.executeUpdate();
+            System.out.println("Utente inserito");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nell'inserimento dell'utente", ex);
+        }
     }
     
     /**
-    * 
     * @brief Recupera tutti gli utenti dal database.
     * 
     * @pre conn!= null, tableName deve esistere nel database connesso
@@ -102,40 +86,25 @@ public class Database  {
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella da cui recuperare gli utenti.
-    * @return HashMap contenente le coppie email-password degli utenti.
-    * 
     */
 
   
-    public HashMap<String, String> getUser(Connection conn, String tableName){
-        
-        Statement statement;
-        ResultSet rs= null;
-        Map <String,String>table=null;
-        String email;
-        String password;
-        try {
-            table =  new HashMap();
-            String query= String.format("select * from %s", tableName);
-            statement= conn.createStatement();
-            rs= statement.executeQuery(query);
-            while(rs.next()){
-                email=rs.getString("email");
-                password=rs.getString("password");
-                table.put(email, password);      
+    public HashMap<String, String> getUser(Connection conn, String tableName) {
+        HashMap<String, String> users = new HashMap<>();
+        String query = String.format("SELECT * FROM %s", tableName);
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                users.put(rs.getString("email"), rs.getString("password"));
             }
-            statement.close(); 
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nel recupero degli utenti", ex);
         }
-        
-        return (HashMap<String, String>) table;
+        return users;
     }
     
     
     
     /**
-    * 
     * @brief Verifica le credenziali di login di un utente.
     * 
     * 
@@ -148,41 +117,24 @@ public class Database  {
     * @param email Email dell'utente.
     * @param password Password inserita dall'utente.
     * @return 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
     */
 
     
-    public int checkLogin(Connection conn,String tableName, String email, String password) throws SQLException{
-    
-    ResultSet rs= null;
-    int esito;  
-            Statement statment;
-            String query= String.format("select * from %s where email='%s'", tableName,email);
-            statment= conn.createStatement();
-            rs=statment.executeQuery(query);
-         
-            if (!rs.isBeforeFirst()) {
-                System.out.println("No data found."); 
-                esito= -1;// -1 perchè email non è presente nel db
-            }else{
-                do{
-                    rs.next();
-                    String em=rs.getString("email");
-                    String hashed = rs.getString("password");
-                    System.out.print("\n"+email+"   checkLogin");
-                   
-
-                    if( checkPassword( password,hashed)){
-                         System.out.print(" \n password Giusta ");
-                         esito=1; // email e password sono corette e l' utente entra
-                    }else{
-                       System.out.print(" \n password Sbagliata ");
-                       esito= 0;// email corretta e password sbagliata
-                    }
-                }while(rs.next());
-           }
-        statment.close(); 
-        return esito;
+    public int checkLogin(Connection conn, String tableName, String email, String password) {
+        String query = String.format("SELECT password FROM %s WHERE email = ?", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String hashedPassword = rs.getString("password");
+                    return checkPassword(password, hashedPassword) ? 1 : 0;
+                }
+                return -1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nel controllo del login", ex);
+            return -1;
+        }
     }
     
     /**
@@ -196,13 +148,11 @@ public class Database  {
     * @return  Una stringa criptata
     */
 
-    
     private static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
     
     /**
-    * 
     * @brief Verifica corrispondenza tra password criptata e password in chiaro
     * 
     * @pre  la password!= null
@@ -223,7 +173,6 @@ public class Database  {
     
     
     /**
-    * 
     * @brief Recupera i contatti associati a un utente specifico.
     * 
     * @pre  la password!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e deve essere di un utente registrato
@@ -237,35 +186,24 @@ public class Database  {
     */
 
     
-   public ArrayList<Contact> getContact(Connection conn, String tableName,String email){
-        
-        Statement statement;
-        ResultSet rs= null;
-        ArrayList<Contact>table=null;
-        try {
-            table =  new ArrayList<>();
-            String query= String.format("select * from %s where email='%s'", tableName,email);
-            statement= conn.createStatement();
-            rs= statement.executeQuery(query);
-            while(rs.next()){
-                String name = rs.getString("name");
-                String surname= rs.getString("surname");
-                String numeri = rs.getString("number");
-                String tag = rs.getString("tag");
-                String em_cont = rs.getString("email_contact");
-                String ID = rs.getString("id");
-                table.add(createContact(name,surname,numeri,tag,em_cont,ID));
+    public ArrayList<Contact> getContact(Connection conn, String tableName, String email) {
+        ArrayList<Contact> contacts = new ArrayList<>();
+        String query = String.format("SELECT * FROM %s WHERE email = ?", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    contacts.add(createContact(rs.getString("name"), rs.getString("surname"), rs.getString("number"),
+                            rs.getString("tag"), rs.getString("email_contact"), rs.getString("id")));
+                }
             }
-            statement.close(); 
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nel recupero dei contatti", ex);
         }
-    
-        return (ArrayList<Contact>) table;
+        return contacts;
     }
     
     /**
-    *  
     * @brief Crea un contatto.
     * 
     * @pre  ID non nullo
@@ -278,41 +216,26 @@ public class Database  {
     * @param em_cont stringa contenete l' emails del contatto con dei separatori.
     * @param ID contiene l' identificativo univoco del contatto
     * @return Contact contenente con tutti i parametri passati.
-    * 
     */
 
-   private Contact createContact(String name, String surname, String numeri, String tag, String em_cont,String ID) {
-        Contact c= new Contact(name,surname, ID); 
-        ArrayList<String> n = new ArrayList<>();
-        ArrayList<String> e = new ArrayList<>();
-        ArrayList<Tag> t = new ArrayList<>();
-        
-        
-            Scanner i = new Scanner(tag);
-            i.useDelimiter(";");
-             while(i.hasNext()){
-                 t.add( Tag.valueOf(i.next()));
+   private Contact createContact(String name, String surname, String numbers, String tags, String emails, String ID) {
+        Contact contact = new Contact(name, surname, ID);
+        contact.setTag(parseDelimited(tags, Tag::valueOf));
+        contact.setNumber(parseDelimited(numbers, s -> s));
+        contact.setEmail(parseDelimited(emails, s -> s));
+        return contact;
+    }
+   
+   
+   private <T> ArrayList<T> parseDelimited(String input, java.util.function.Function<String, T> mapper) {
+        ArrayList<T> list = new ArrayList<>();
+        try (Scanner scanner = new Scanner(input)) {
+            scanner.useDelimiter(";");
+            while (scanner.hasNext()) {
+                list.add(mapper.apply(scanner.next()));
             }
-             System.out.print(t+" \n");
-             c.setTag(t);
-             
-            i = new Scanner(numeri);
-            i.useDelimiter(";");
-            while(i.hasNext()){
-                 n.add( i.next());
-            }
-             System.out.print(n+" \n");
-             c.setNumber(n);
-            
-            i = new Scanner(em_cont);
-            i.useDelimiter(";");
-            while(i.hasNext()){
-                 e.add( i.next());
-            }
-            System.out.print(e+" \n");
-             c.setEmail(e);
-        
-        return c;
+        }
+        return list;
     }
     
     /**
@@ -325,50 +248,31 @@ public class Database  {
     * 
     * 
     * 
-    * @param cont contatto da aggiungere
+    * @param contact contatto da aggiungere
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
-    * @param email_Utente Email dell'utente che ha fatto il login.
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    * @param userEmail Email dell'utente che ha fatto il login.
     */
 
     
-     public void insertContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
-    
-           Statement statment;
-           String nm=cont.getName();
-           String srn=cont.getSurname();
-           String ID= String.valueOf(cont.getID());
-           
-           ArrayList<String> e = cont.getEmailList();
-           ArrayList<String> n = cont.getNumberList();
-           ArrayList<Tag> t =cont.getTagList();
-           
-            /*formatto le email*/
-           String email= formattaOut(e);
-           
-            /*formatto i numeri*/
-           String number= formattaOut(n);
-           
-           /*formatto i tag*/
-           ArrayList<String> St= new ArrayList<>();
-           for (Tag i : t) { 
-               St.add(i.name());
-           }
-           String tag= formattaOut(St);
-           
-           
-           String query;
-           query = String.format("insert into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s');",tableName,  email_Utente,nm,srn,number,tag,email,ID);
-           statment= conn.createStatement();
-           statment.executeUpdate(query);
-           System.out.println("Contatto inserito");
-           statment.close(); 
-        
+    public void insertContact(Connection conn, String tableName, Contact contact, String userEmail) {
+        String query = String.format("INSERT INTO %s (email, name, surname, number, tag, email_contact, id) VALUES (?, ?, ?, ?, ?, ?, ?);", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, userEmail);
+            pstmt.setString(2, contact.getName());
+            pstmt.setString(3, contact.getSurname());
+            pstmt.setString(4, formatList(contact.getNumberList()));
+            pstmt.setString(5, formatList(contact.getTagList(), Tag::name));
+            pstmt.setString(6, formatList(contact.getEmailList()));
+            pstmt.setString(7, contact.getID());
+            pstmt.executeUpdate();
+            System.out.println("Contatto inserito");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nell'inserimento del contatto", ex);
+        }
     }
     
     /**
-    *  
     * @brief Concatena i valori di una lista in una stringa formattata.
     * 
     * @pre  s non può essere vuota o nulla  
@@ -381,7 +285,6 @@ public class Database  {
     * separati dal carattere `;`.
     * @param s ArrayList da formattare.
     * @return Una stringa contenente gli elementi della lista concatenati e separati da `;`. Se la lista è vuota, restituisce una stringa vuota.
-    * 
     */
 
     private String formattaOut(ArrayList<String> s) {
@@ -395,7 +298,6 @@ public class Database  {
     }
     
     /**
-    * 
     * @brief Modifica il contatto associato a un utente specifico nel Database.
     * 
     * @pre  conn!= null,tableName deve esistere nel database connesso, cont!= null, il contatto deve essere già presente e deve esser gia associato a email_Utente, email_Utente deve essere valida e registrata nel DataBase 
@@ -405,47 +307,28 @@ public class Database  {
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
-    * @param cont il contatto da modificare nel Database
-    * @param email_Utente Email dell'utente che ha fatto il login.
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
-    * 
+    * @param contact il contatto da modificare nel Database
+    * @param userEmail Email dell'utente che ha fatto il login.
     */
 
-    public void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
-        
-         Statement statment;
-           String nm=cont.getName();
-           String srn=cont.getSurname();
-           String ID= cont.getID();
-           
-           ArrayList<String> e = cont.getEmailList();
-           ArrayList<String> n = cont.getNumberList();
-           ArrayList<Tag> t =cont.getTagList();
-        
-             /*formatto le email*/
-           String email= formattaOut(e);
-           
-            /*formatto i numeri*/
-           String number= formattaOut(n);
-           
-           /*formatto i tag*/
-           ArrayList<String> St= new ArrayList<>();
-           for (Tag i : t) { 
-               St.add(i.name());
-           }
-           String tag= formattaOut(St);
-           
-           
-      String query = String.format("UPDATE %s SET name='%s', surname='%s', number='%s', tag='%s', email_contact='%s' WHERE email='%s' AND id='%s'", tableName, nm, srn, number, tag, email, email_Utente, ID);
-      
-      statment= conn.createStatement();
-      statment.executeUpdate(query);
-      System.out.println("Contatto modificato");
-      statment.close(); 
+    public void modifyContact(Connection conn, String tableName, Contact contact, String userEmail) {
+        String query = String.format("UPDATE %s SET name = ?, surname = ?, number = ?, tag = ?, email_contact = ? WHERE email = ? AND id = ?", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, contact.getName());
+            pstmt.setString(2, contact.getSurname());
+            pstmt.setString(3, formatList(contact.getNumberList()));
+            pstmt.setString(4, formatList(contact.getTagList(), Tag::name));
+            pstmt.setString(5, formatList(contact.getEmailList()));
+            pstmt.setString(6, userEmail);
+            pstmt.setString(7, contact.getID());
+            pstmt.executeUpdate();
+            System.out.println("Contatto modificato");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nella modifica del contatto", ex);
+        }
     }
     
    /**
-    * 
     * @brief Rimuove un record dalla tabella specificata utilizzando l'ID.
     * Questo metodo esegue un'operazione di eliminazione (`DELETE`) su una tabella 
     * di un database, rimuovendo il record che corrisponde all'ID specificato.
@@ -459,35 +342,34 @@ public class Database  {
     * @param tableName Nome della tabella contenente i contatti.
     * @param ID il contatto da modificare nel Database
     * @param email l' email del utente registrato
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
-    * 
     */
-     public void removeContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
-    
-       Statement statment;
-       
-       String query= String.format("delete from %s where ID='%s' AND email='%s'",tableName,ID,email);
-       statment= conn.createStatement();
-       statment.execute(query);
-       System.out.print("\n Dato eliminato per ID");
-       statment.close(); 
+    public void removeContactByID(Connection conn, String tableName, String ID, String email) {
+        String query = String.format("DELETE FROM %s WHERE id = ? AND email = ?", tableName);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, ID);
+            pstmt.setString(2, email);
+            pstmt.executeUpdate();
+            System.out.println("Contatto eliminato");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nella rimozione del contatto", ex);
+        }
     }
+    
     /**
-    * 
     * @brief Chiude la connessione col database
     * @pre  conn!= null
-    * @post la connessione col Database viene chiusa  
-    * 
-    * 
-    * @param conn Oggetto Connection per interagire con il database.
-    * 
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    * @post la connessione col Database viene chiusa
     */
 
-    
-    public void CloseConnection(Connection conn) throws SQLException{
-        conn.close();
-        System.out.print("Chiusura connessione");
+    public void CloseConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Chiusura connessione");
+            } catch (SQLException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nella chiusura della connessione", ex);
+            }
+        }
     }
     
     /**
@@ -501,22 +383,27 @@ public class Database  {
     * @param tableName nome della tabella dal quale prendere le informazioni
     * @return viene restituito il numero di righe della tabella 
     */
-    public int getNumberContact(Connection conn, String tableName){
-        
-        int numero_righe=0;
-        try {
-            Statement statement = conn.createStatement();
-            String query = String.format("SELECT COUNT(*) AS rowcount FROM %s", tableName);//conta il numero di righe nella tabella nome_tabella e assegna il risultato alla colonna rowcount
-            ResultSet rs = statement.executeQuery(query);
-            if (rs.next()) { 
-             numero_righe = rs.getInt("rowcount"); 
-            System.out.println("Numero di righe: " + numero_righe); 
+    public int getNumberContact(Connection conn, String tableName) {
+        String query = String.format("SELECT COUNT(*) AS rowcount FROM %s", tableName);
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt("rowcount");
             }
-            statement.close(); 
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-         
-        return numero_righe;
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Errore nel conteggio dei contatti", ex);
+        }
+        return 0;
+    }
+    
+    private String formatList(ArrayList<String> list) {
+        return String.join(";", list);
+    }
+
+    private <T> String formatList(ArrayList<T> list, java.util.function.Function<T, String> mapper) {
+        ArrayList<String> mapped = new ArrayList<>();
+        for (T item : list) {
+            mapped.add(mapper.apply(item));
+        }
+        return String.join(";", mapped);
     }
 }
