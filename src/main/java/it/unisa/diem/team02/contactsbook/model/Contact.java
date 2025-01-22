@@ -3,6 +3,7 @@ package it.unisa.diem.team02.contactsbook.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @brief Classe che modella un contatto.
@@ -45,9 +46,9 @@ public class Contact implements Comparable<Contact>{
     public Contact(String name, String surname) {
         this.name=name;
         this.surname=surname;
-        number = new ArrayList<String>();
-        email = new ArrayList<String>();
-        this.tag= new ArrayList<Tag>();
+        number = new ArrayList<>();
+        email = new ArrayList<>();
+        this.tag= new ArrayList<>();
         this.ID = this.generateID();
     }
     
@@ -366,6 +367,14 @@ public class Contact implements Comparable<Contact>{
         Contact c = (Contact) o;
         
         return c.getName().toUpperCase().equals(this.getName().toUpperCase()) && c.getSurname().toUpperCase().equals(this.getSurname().toUpperCase());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.surname);
+        return hash;
     }
     
     /**
