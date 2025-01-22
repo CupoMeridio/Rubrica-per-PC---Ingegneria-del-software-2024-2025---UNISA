@@ -30,8 +30,8 @@ public class DuplicateContactViewController implements Initializable {
      * Metodo di inizializzazione del controller.
      * Chiama i metodi che inizializzano i vari componenti.
      * 
-     * @param url utilizzato per risolvere il percorso del file FXML.
-     * @param rb contenente dati di localizzazione.
+     * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzate in questo caso).
+     * @param rb Risorse locali associate alla vista (non utilizzate in questo caso).
      * 
      * @note Metodo non utilizzato
      * 
