@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package it.unisa.diem.team02.contactsbook.database;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
@@ -11,16 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -58,8 +46,8 @@ public class DatabaseTest {
         
         System.out.print("\n nel metodo statico  "+ email_utente+"  "+password_utente);
         cont= new Contact("Vittorio","Postiglione");
-        ArrayList<String> number = new ArrayList<String>();
-        ArrayList<String> em= new ArrayList<String>();
+        ArrayList<String> number = new ArrayList<>();
+        ArrayList<String> em= new ArrayList<>();
         ArrayList<Tag> tag= new ArrayList<>();
         
         tag.add(Tag.Home);
@@ -90,7 +78,7 @@ public class DatabaseTest {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-       db.CloseConnection(conn);
+       db.CloseConnection();
     }
     /**
      * Test of ConnectionDB method, of class Database.
@@ -201,13 +189,14 @@ public class DatabaseTest {
 
     /**
      * Test of modifyContact method, of class Database.
+     * @throws java.lang.Exception
      */
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(9)
     public void testModifyContact() throws Exception {
         System.out.println("modifyContact");
         String tableName = "contatti";
-        ArrayList<String> number = new ArrayList<String>();
+        ArrayList<String> number = new ArrayList<>();
         number.add("0815095344");
         number.add("3279006099");
         number.add("numero cambiato");
@@ -243,21 +232,8 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Order(11)
     public void testCloseConnection() throws Exception {
         System.out.println("CloseConnection");
-        db.CloseConnection(conn);
+        db.CloseConnection();
     }
 
-    /**
-     * Test of getNumberContact method, of class Database.
-     */
-    /*@org.junit.jupiter.api.Test
-    public void testGetNumberContact() {
-        System.out.println("getNumberContact");
-        String tableName = "";
-        Database instance = new Database();
-        int expResult = 0;
-        int result = instance.getNumberContact(conn, tableName);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/   
+
 }
