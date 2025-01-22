@@ -1,7 +1,5 @@
 package it.unisa.diem.team02.contactsbook.model;
 
-import it.unisa.diem.team02.contactsbook.database.Database;
-import it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,14 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Thread.sleep;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 
 /**
@@ -28,7 +22,7 @@ import javafx.collections.ObservableList;
  * @author team02
  */
 public class Contactbook {
-    private ObservableList<Contact> contacts;
+    private final ObservableList<Contact> contacts;
 
     
     /**
@@ -139,7 +133,6 @@ public class Contactbook {
     *       con i dati esportati.
     *
     * @param filename Il file in cui salvare il contatto.
-    * @throws FileNotFoundException Se il file non viene trovato.
     * @throws IOException Se si verifica un errore durante la scrittura nel file.
     */
     public void saveOnFile(File filename) throws IOException{
@@ -202,11 +195,11 @@ public class Contactbook {
     * aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, 
     * si verifica che questo non sia vuoto.
     * 
+    * @param filename File nel quale sono salvati i contatti.
     * @pre Il file passato come parametro deve essere un file valido.
     * @post I contatti letti dal file vengono aggiunti alla rubrica.
     * 
     * @throws IOException Se si verifica un errore durante la lettura del file.
-    * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
     */
     public void loadFromFile(File filename) throws IOException{
         
