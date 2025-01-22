@@ -1,4 +1,68 @@
-/*
- * Empty Stylesheet file.
- */
+/* Stile generale */
+.mainFxmlClass {
+    -fx-background-color: #f4f4f4; /* Sfondo chiaro */
+    -fx-font-family: 'Arial', sans-serif;
+}
 
+/* Stile per le VBox */
+#vBoxLogin, #vboxSignin {
+    -fx-background-color: #ffffff; /* Sfondo bianco per i form */
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* Stile per le etichette */
+Label {
+    -fx-text-fill: #333333; /* Testo scuro */
+    -fx-font-size: 14px;
+}
+
+/* Stile per i campi di testo */
+TextField, PasswordField {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Stile per i pulsanti */
+Button {
+    -fx-background-color: #5cb85c; /* Verde chiaro */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+Button:hover {
+    -fx-background-color: #4cae4c; /* Verde più scuro al passaggio del mouse */
+}
+
+Button:pressed {
+    -fx-background-color: #449d44;
+}
+
+/* Stile per i messaggi di errore */
+Label#errorLabel, Label#lblLogErr, Label#lblErrorEmail, Label#lblErrorPass, Label#lblPassInequals {
+    -fx-text-fill: #d9534f; /* Rosso scuro */
+    -fx-font-size: 12px;
+}
+
+/* Stile per i margini */
+HBox {
+    -fx-spacing: 15px;
+}
+
+VBox {
+    -fx-spacing: 10px;
+}
