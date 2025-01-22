@@ -1,7 +1,117 @@
-/*
- * Empty Stylesheet file.
- */
+/* Stile generale per lo SplitPane */
+.split-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-divider-width: 3px;
+    -fx-divider-background: #adb5bd;
+}
 
-.mainFxmlClass {
+/* Stile per gli AnchorPane */
+#anchorUp, #anchorBottom {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+}
 
+/* Stile per i bottoni */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #007bff, #0056b3);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #339af0, #0069d9);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0056b3, #004085);
+}
+
+/* Pulsante Logout con colore diverso */
+#btnLogout {
+    -fx-background-color: linear-gradient(to bottom, #dc3545, #c82333);
+}
+
+#btnLogout:hover {
+    -fx-background-color: linear-gradient(to bottom, #e4606d, #b21f2d);
+}
+
+#btnLogout:pressed {
+    -fx-background-color: linear-gradient(to bottom, #c82333, #a71d2a);
+}
+
+/* Stile per il MenuButton */
+.menu-button {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+}
+
+.menu-button:hover {
+    -fx-border-color: #80bdff;
+}
+
+/* Stile per CheckMenuItems */
+.check-menu-item {
+    -fx-text-fill: #495057;
+    -fx-font-size: 13px;
+}
+
+.check-menu-item:selected {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+/* Stile per la barra di ricerca */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+    -fx-border-color: #80bdff;
+    -fx-border-width: 2px;
+}
+
+/* Stile per la TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.table-column {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343a40;
+}
+
+.table-cell {
+    -fx-font-size: 12px;
+    -fx-text-fill: #495057;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+/* Stile per la HBox */
+.hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
 }

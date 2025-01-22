@@ -20,9 +20,17 @@
             <VBox fx:id="vBoxLogin" prefHeight="507.0" prefWidth="302.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="lblLogMail" text="E-mail" />
-                  <TextField fx:id="txtLogMail" />
+                  <TextField fx:id="txtLogMail">
+                    <VBox.margin>
+                    <Insets top="0" right="0" bottom="24" left="0" />
+                    </VBox.margin>
+                  </TextField>
                   <Label fx:id="lblLogPass" text="Password" />
-                  <PasswordField fx:id="txtLogPass" />
+                  <PasswordField fx:id="txtLogPass">
+                    <VBox.margin>
+                    <Insets top="0" right="0" bottom="23" left="0" />
+                    </VBox.margin>
+                  </PasswordField>
                   
                   <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="Login" />
                   <Label fx:id="lblLogErr" prefHeight="37.0" prefWidth="276.0" />

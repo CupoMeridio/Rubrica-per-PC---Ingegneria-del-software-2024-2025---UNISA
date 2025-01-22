@@ -1,7 +1,89 @@
-/*
- * Empty Stylesheet file.
- */
+/* Stile generale per l'AnchorPane */
+#add {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+}
 
-.mainFxmlClass {
+/* Etichette */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #495057;
+}
 
+/* Campi di testo */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+    -fx-border-color: #80bdff;
+    -fx-border-width: 2px;
+}
+
+/* Pulsanti */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #007bff, #0056b3);
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #339af0, #0069d9);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0056b3, #004085);
+}
+
+/* Pulsante Annulla */
+#btnCanc {
+    -fx-background-color: linear-gradient(to bottom, #dc3545, #c82333);
+}
+
+#btnCanc:hover {
+    -fx-background-color: linear-gradient(to bottom, #e4606d, #b21f2d);
+}
+
+#btnCanc:pressed {
+    -fx-background-color: linear-gradient(to bottom, #c82333, #a71d2a);
+}
+
+/* Caselle di controllo */
+.check-box {
+    -fx-font-size: 13px;
+    -fx-text-fill: #343a40;
+}
+
+.check-box .box {
+    -fx-border-color: #868e96;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.check-box:selected .box {
+    -fx-border-color: #007bff;
+    -fx-background-color: #007bff;
+}
+
+/* Layout */
+.hbox, .vbox {
+    -fx-spacing: 10px;
 }
