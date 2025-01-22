@@ -11,7 +11,7 @@ import javafx.collections.transformation.FilteredList;
  */
 public class Filter {
     
-    private FilteredList<Contact> flContacts;
+    private final FilteredList<Contact> flContacts;
     private String matchString;
     private boolean isSelectedHome;
     private boolean isSelectedUni;
