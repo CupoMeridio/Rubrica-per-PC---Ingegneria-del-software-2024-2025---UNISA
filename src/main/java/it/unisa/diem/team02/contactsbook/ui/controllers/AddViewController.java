@@ -7,10 +7,7 @@ import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -204,11 +201,7 @@ public class AddViewController implements Initializable {
                 
             if (duplicateC.getBoolean()){
                 
-                    try {
-                        database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
                     contactbook.add(c);
                     
                     Stage stage=(Stage) btnAdd.getScene().getWindow();
@@ -219,11 +212,7 @@ public class AddViewController implements Initializable {
                 }       
         }
         else{
-            try {
-                database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
-                } catch (SQLException ex) {
-                    Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
             contactbook.add(c);
             Stage stage=(Stage) btnAdd.getScene().getWindow();
             stage.close();
