@@ -7,11 +7,8 @@ import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -222,7 +219,7 @@ public void setContact(Contact contact) {
     
     // Imposta le email separandole se presenti
     String email = oldContact.getEmail();
-    if (email != ""){
+    if (!"".equals(email)){
         String[] emails = email.split("\n");
         txtEmail1.setText(emails[0]);
         
@@ -240,7 +237,7 @@ public void setContact(Contact contact) {
     // Imposta i tag
     String tag = oldContact.getTag();
     if (tag != null){
-        String tags = tag.toString();
+        String tags = tag;
         if(tags.contains("Home"))
             chkmHome.setSelected(true);
         if(tags.contains("University"))
@@ -311,11 +308,7 @@ private void actionModify(ActionEvent event) throws IOException {
     // Verifica se il contatto esiste già nella lista
     if (!contactbook.contains(newContact, oldContact)){
         // Se il contatto non è un duplicato, sostituisci il vecchio contatto con il nuovo
-            try {
-            database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
-        } catch (SQLException ex) {
-            Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
         contactbook.delete(oldContact);
         contactbook.add(newContact);
         Stage stage = (Stage) btnModify.getScene().getWindow();
@@ -337,11 +330,7 @@ private void actionModify(ActionEvent event) throws IOException {
         // Se l'utente conferma la modifica, salva il nuovo contatto
         if (duplicateC.getBoolean()) {
             
-            try {
-                database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
-            } catch (SQLException ex) {
-                Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
             
             contactbook.delete(oldContact);
             contactbook.add(newContact);
