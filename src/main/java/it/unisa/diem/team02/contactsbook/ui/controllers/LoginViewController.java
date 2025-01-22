@@ -350,42 +350,29 @@ private void txtConfirmPassInitialize() {
         Database database = new Database();
           Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
         //Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
-        try {
-            int esito = database.checkLogin(Database.connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
-             if(esito==0){
-                lblLogErr.setText("Password errata.");
-                database.CloseConnection(database.connection);
-                Database.connection=null;
-             }
-             else if(esito==-1){
-                lblLogErr.setText("Non esiste alcun account legato a questa email.");
-                database.CloseConnection(Database.connection);
-                Database.connection=null;
-            }
-            else if(esito==1){
-                lblLogErr.setText("Login effettuato con successo.");
-                Database.user= new User(txtLogPass.getText(), txtLogMail.getText());
-                try {
-                    App.setRoot("ContactsbookView");
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }    
-            }
-            else{
-            lblLogErr.setText("Qualcosa è anadato storto.");
-            database.CloseConnection(Database.connection);
+        int esito = database.checkLogin(Database.connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
+        if(esito==0){
+            lblLogErr.setText("Password errata.");
+            database.CloseConnection();
             Database.connection=null;
-            }
-
-
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else if(esito==-1){
+            lblLogErr.setText("Non esiste alcun account legato a questa email.");
+            database.CloseConnection();
+            Database.connection=null;
+        }
+        else if(esito==1){
+            lblLogErr.setText("Login effettuato con successo.");
+            Database.user= new User(txtLogPass.getText(), txtLogMail.getText());
             try {
-                database.CloseConnection(Database.connection);
-            } catch (SQLException ex1) {
-                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex1);
+                App.setRoot("ContactsbookView");
+            } catch (IOException ex) {
+                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        else{
+            lblLogErr.setText("Qualcosa è anadato storto.");
+            database.CloseConnection();
             Database.connection=null;
         }
        
@@ -414,18 +401,7 @@ private void txtConfirmPassInitialize() {
         Database database= new Database();
           Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
         //Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
-        try {
-            database.insertUser(Database.connection, "utenti" ,txtSignMail.getText(), txtSignPass.getText());
-        } catch (SQLException ex) {
-            txtSignError.setText("L'email è già associata ad un'account.\nEsegui il login.");
-            Database.connection=null;
-            
-            try {
-                database.CloseConnection(Database.connection);
-            } catch (SQLException ex1) {
-                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-        }
+        database.insertUser(Database.connection, "utenti" ,txtSignMail.getText(), txtSignPass.getText());
         
         Database.user = new User(txtSignPass.getText(), txtSignMail.getText());
         
