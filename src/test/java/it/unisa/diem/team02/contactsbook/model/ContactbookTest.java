@@ -1,7 +1,5 @@
 package it.unisa.diem.team02.contactsbook.model;
 
-import it.unisa.diem.team02.contactsbook.model.Contact;
-import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
