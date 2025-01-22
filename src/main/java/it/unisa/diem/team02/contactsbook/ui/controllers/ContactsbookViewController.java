@@ -7,12 +7,10 @@ import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Filter;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
@@ -97,6 +95,7 @@ public class ContactsbookViewController implements Initializable {
     private SortedList<Contact> sortedContacts;
 
 /**
+
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
  * 
  * Questo metodo viene invocato automaticamente all'avvio della scena e prepara la lista di contatti,
@@ -116,6 +115,7 @@ public class ContactsbookViewController implements Initializable {
         btnDeleteInitialize();
         initializeSearch();
         mbtnFilter.setOnShown(event->{actionFilter();});
+        tblvContacts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
            
     }    
     
@@ -194,7 +194,6 @@ public class ContactsbookViewController implements Initializable {
               AddViewController addC=loader.getController();
               addC.setContactbook(contactbook);
               
-    
               //gestire eccezione
               Stage newStage = new Stage();
               newStage.setScene(scene);
@@ -248,9 +247,7 @@ public class ContactsbookViewController implements Initializable {
               newStage.show();
               
               Contact selectedContact = tblvContacts.getSelectionModel().getSelectedItem();
-              
-            
-              
+
               modifyC.setContactbook(contactbook);
               modifyC.setContact(selectedContact);
               try{
@@ -324,11 +321,7 @@ public class ContactsbookViewController implements Initializable {
     private void actionDelete(ActionEvent event) {
         Database database = new Database ();
         Contact selectedContact = tblvContacts.getSelectionModel().getSelectedItem();
-        try {
-            database.removeContactByID(Database.connection, "contatti", selectedContact.getID(), Database.user.getEmail());
-        } catch (SQLException ex){
-            Logger.getLogger(ContactsbookViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        database.removeContactByID(Database.connection, "contatti", selectedContact.getID(), Database.user.getEmail());
         contactbook.delete(selectedContact); 
     }
     
@@ -422,11 +415,7 @@ public class ContactsbookViewController implements Initializable {
                 int secondaSize=contactbook.getContacts().size();
                 System.out.println(contactbook.getContacts().subList(primaSize,secondaSize));
                 for(Contact c : contactbook.getContacts().subList(primaSize,secondaSize))
-                try {
-                        database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
-                    } catch (SQLException ex) {
-                        System.out.println("Rilevato contatto duplicato: " + c);
-                    }
+                    database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
                 
                 try{
                     TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
@@ -440,7 +429,7 @@ public class ContactsbookViewController implements Initializable {
                 alert.setHeaderText("");
                 alert.setContentText("File import was successfully completed.");
                 alert.showAndWait();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText("");
@@ -479,7 +468,7 @@ public class ContactsbookViewController implements Initializable {
                 alert.setHeaderText("");
                 alert.setContentText("File export was successfully completed.");
                 alert.showAndWait();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText("");
@@ -507,11 +496,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private void actionLogout(ActionEvent event) {
         Database database = new Database();
-        try {
-            database.CloseConnection(Database.connection);
-        } catch (SQLException ex) {
-            Logger.getLogger(ContactsbookViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        database.CloseConnection();
         Database.connection=null;
         
         try{
