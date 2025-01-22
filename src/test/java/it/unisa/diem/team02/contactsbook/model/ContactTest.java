@@ -64,8 +64,10 @@ public class ContactTest {
     public void testConstructor1() {
         Test1 = new Contact("Anuar", "Zouhri");
         Test2 = new Contact("Valeria","");
+        Test3 = new Contact("","Postiglione");
         assertNotNull(Test1);
         assertNotNull(Test2);
+        assertNotNull(Test3);
     }
     
     
@@ -74,8 +76,18 @@ public class ContactTest {
      */
     @Test
     public void testConstructor2() {
+        Test1 = new Contact("Vittorio", "", "1");
         Test3 = new Contact("","Postiglione","10");
         assertNotNull(Test3);
+    }
+    
+    /**
+     * Test del metodo get ID
+     */
+    @Test
+    public void testGetID(){
+        Test1 = new Contact("Vittorio","Postiglione", "2");
+        assertEquals("2",Test1.getID());
     }
     
     
