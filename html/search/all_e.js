@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['salerno_20unisa_0',['Università degli Studi di Salerno (UNISA)',['../index.html#autotoc_md2',1,'']]],
+  ['salerno_20unisa_0',['Università degli Studi di Salerno (UNISA)',['../index.html#autotoc_md1',1,'']]],
   ['saveonfile_1',['saveOnFile',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contactbook.html#a56ff28ee5cf391fb77225980702cda4e',1,'it::unisa::diem::team02::contactsbook::model::Contactbook']]],
   ['sequencediagram_5factionmodify_2epuml_2',['SequenceDiagram_actionModify.puml',['../_sequence_diagram__action_modify_8puml.html',1,'']]],
   ['sequencediagram_5flogin_2epuml_3',['SequenceDiagram_Login.puml',['../_sequence_diagram___login_8puml.html',1,'']]],
@@ -17,6 +17,12 @@ var searchData=
   ['setsurname_14',['setSurname',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#a2cd9a7eb60a19618a32353c1e7a96165',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
   ['settag_15',['setTag',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html#af42116006dbf8d2e8d000059dec3eea2',1,'it::unisa::diem::team02::contactsbook::model::Contact']]],
   ['start_16',['start',['../classit_1_1unisa_1_1diem_1_1team02_1_1_app.html#a2c4343defa5e2ab38937053e72b33b01',1,'it::unisa::diem::team02::App']]],
-  ['studi_20di_20salerno_20unisa_17',['Università degli Studi di Salerno (UNISA)',['../index.html#autotoc_md2',1,'']]],
-  ['sviluppo_18',['👥 Team di Sviluppo',['../index.html#autotoc_md7',1,'']]]
+  ['strong_17',['strong',['../index.html#autotoc_md8',1,'&lt;strong&gt;Clonare il repository:&lt;/strong&gt;'],['../index.html#autotoc_md10',1,'&lt;strong&gt;Compilare ed eseguire il progetto:&lt;/strong&gt;'],['../index.html#autotoc_md9',1,'&lt;strong&gt;Configurare il database:&lt;/strong&gt;'],['../index.html#autotoc_md11',1,'&lt;strong&gt;File eseguibile disponibile:&lt;/strong&gt;']]],
+  ['strong_20clonare_20il_20repository_3a_20strong_18',['&lt;strong&gt;Clonare il repository:&lt;/strong&gt;',['../index.html#autotoc_md8',1,'']]],
+  ['strong_20compilare_20ed_20eseguire_20il_20progetto_3a_20strong_19',['&lt;strong&gt;Compilare ed eseguire il progetto:&lt;/strong&gt;',['../index.html#autotoc_md10',1,'']]],
+  ['strong_20configurare_20il_20database_3a_20strong_20',['&lt;strong&gt;Configurare il database:&lt;/strong&gt;',['../index.html#autotoc_md9',1,'']]],
+  ['strong_20file_20eseguibile_20disponibile_3a_20strong_21',['&lt;strong&gt;File eseguibile disponibile:&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]],
+  ['studi_20di_20salerno_20unisa_22',['Università degli Studi di Salerno (UNISA)',['../index.html#autotoc_md1',1,'']]],
+  ['succeeded_23',['succeeded',['../classit_1_1unisa_1_1diem_1_1team02_1_1services_1_1_export_service.html#a4198ad95786fd119155403f8c70fe00f',1,'it.unisa.diem.team02.services.ExportService.succeeded()'],['../classit_1_1unisa_1_1diem_1_1team02_1_1services_1_1_import_service.html#ae050a35ab0397a52a2479009ac0c6617',1,'it.unisa.diem.team02.services.ImportService.succeeded()']]],
+  ['sviluppo_24',['👥 Team di Sviluppo',['../index.html#autotoc_md6',1,'']]]
 ];

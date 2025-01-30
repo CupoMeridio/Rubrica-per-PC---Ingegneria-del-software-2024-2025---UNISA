@@ -7,31 +7,8 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <release>11</release>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.4</version>
-        <executions>
-          <execution>
-            <id>default-cli</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <mainClass>it.unisa.diem.team02.App</mainClass>
-        </configuration>
-      </plugin>
-      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.4.1</version>
+        <version>3.6.0</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -41,28 +18,75 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>it.unisa.diem.team02.App</mainClass>
+                  <mainClass>it.unisa.diem.team02.RunMain</mainClass>
+                </transformer>
+                <transformer />
+                <transformer>
+                  <resource>META-INF/services/*</resource>
                 </transformer>
               </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>module-info.class</exclude>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <finalName>${project.artifactId}-${project.version}</finalName>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
             </configuration>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>it.unisa.diem.team02.RunMain</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <executions>
+          <execution>
+            <id>default-cli</id>
+          </execution>
+          <execution>
+            <id>debug</id>
+            <configuration>
+              <options>
+                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
+              </options>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>it.unisa.diem.team02.RunMain</mainClass>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>javafx-runtime</id>
-      <properties>
-        <javafx.runtime>path_to_javafx_sdk</javafx.runtime>
-      </properties>
-    </profile>
-  </profiles>
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.10.3</version>
+      <version>5.11.4</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -82,7 +106,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.10.3</version>
+      <version>5.11.4</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -94,7 +118,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.10.3</version>
+      <version>5.11.4</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -109,8 +133,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
   </properties>
 </project>
