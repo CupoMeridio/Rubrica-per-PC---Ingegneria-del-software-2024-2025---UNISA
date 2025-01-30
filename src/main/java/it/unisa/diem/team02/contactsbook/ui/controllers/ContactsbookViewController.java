@@ -5,6 +5,8 @@ import it.unisa.diem.team02.contactsbook.database.Database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Filter;
+import it.unisa.diem.team02.services.ExportService;
+import it.unisa.diem.team02.services.ImportService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +30,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -89,6 +92,8 @@ public class ContactsbookViewController implements Initializable {
     private SplitPane interfacciaRubrica;
     @FXML
     private Button btnLogout;
+    @FXML
+    private ProgressBar progressBar;
     
     private Contactbook contactbook=new Contactbook();
     private Filter filter = new Filter(contactbook.getContacts());
@@ -400,7 +405,6 @@ public class ContactsbookViewController implements Initializable {
  */
     @FXML
     private void actionImport(ActionEvent event) {
-        Database database = new Database();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Apri un file");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
@@ -408,33 +412,11 @@ public class ContactsbookViewController implements Initializable {
         Window window = tblvContacts.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(window);
         
-        if (selectedFile!=null)
-            try {
-                int primaSize=contactbook.getContacts().size();
-                contactbook.loadFromFile(selectedFile);
-                int secondaSize=contactbook.getContacts().size();
-                System.out.println(contactbook.getContacts().subList(primaSize,secondaSize));
-                for(Contact c : contactbook.getContacts().subList(primaSize,secondaSize))
-                    database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
-                
-                try{
-                    TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
-                    tblvContacts.getSortOrder().clear();
-                    tblvContacts.getSortOrder().add(c);
-                } catch (Exception ex){
-                    tblvContacts.getSortOrder().add(clmSur);
-                }
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Operation completed");
-                alert.setHeaderText("");
-                alert.setContentText("File import was successfully completed.");
-                alert.showAndWait();
-        } catch (IOException ex) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("");
-            alert.setContentText("An error occurred during the import. No contact has been imported.");
-            alert.showAndWait();
+        if (selectedFile != null) {
+        ImportService importService = new ImportService(selectedFile,this);
+        progressBar.progressProperty().bind(importService.progressProperty()); // Collega la progress bar
+        progressBar.visibleProperty().bind(importService.runningProperty());
+        importService.start();
         }
     }
     
@@ -460,23 +442,13 @@ public class ContactsbookViewController implements Initializable {
         Window window = (tblvContacts.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
         
-        if (selectedFile!=null)
-            try {
-                contactbook.saveOnFile(selectedFile);
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Operation completed");
-                alert.setHeaderText("");
-                alert.setContentText("File export was successfully completed.");
-                alert.showAndWait();
-        } catch (IOException ex) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("");
-            alert.setContentText("An error occurred during the export. No contact has been exported.");
-            alert.showAndWait();
+        if (selectedFile!=null){
+        ExportService exportService = new ExportService(selectedFile,this);
+        progressBar.progressProperty().bind(exportService.progressProperty()); // Collega la progress bar
+        progressBar.visibleProperty().bind(exportService.runningProperty());
+        exportService.start();      
         }
     }
-    
     
 /**
  * @brief Esegue il logout dell'utente e redirige alla schermata di login.
@@ -505,4 +477,68 @@ public class ContactsbookViewController implements Initializable {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);}
     }
     
+    
+    /**
+     * @brief Restituisce la TableView contenente i contatti.
+     * 
+     * @pre La TableView deve essere stata inizializzata.
+     * @post La TableView dei contatti viene restituita senza modifiche.
+     * 
+     * @return TableView<Contact> la TableView dei contatti.
+     */
+    public TableView<Contact> getTblvContacts(){
+        return this.tblvContacts;   
+    }
+
+    /**
+     * @brief Restituisce la TableColumn relativa ai cognomi dei contatti.
+     * 
+     * @pre La TableColumn deve essere stata inizializzata.
+     * @post La TableColumn dei cognomi viene restituita senza modifiche.
+     * 
+     * @return TableColumn<Contact, String> la colonna dei cognomi.
+     */
+    public TableColumn<Contact, String> getClmSur(){
+        return this.clmSur;
+    }
+
+    /**
+     * @brief Restituisce l'oggetto Contactbook.
+     * 
+     * @pre L'istanza di Contactbook deve essere stata inizializzata.
+     * @post L'oggetto Contactbook viene restituito senza modifiche.
+     * 
+     * @return Contactbook l'oggetto Contactbook associato.
+     */
+    public Contactbook getContactbook(){
+        return this.contactbook;
+    }
+
+    /**
+     * @brief Restituisce la ProgressBar associata.
+     * 
+     * @pre La ProgressBar deve essere stata inizializzata.
+     * @post La ProgressBar viene restituita senza modifiche.
+     * 
+     * @return ProgressBar la barra di avanzamento.
+     */
+    public ProgressBar getProgressBar(){
+        return this.progressBar;
+    }
+
+    /**
+     * @brief Restituisce il pulsante di importazione.
+     * 
+     * @pre Il pulsante deve essere stato inizializzato.
+     * @post Il pulsante di importazione viene restituito senza modifiche.
+     * 
+     * @return Button il pulsante di importazione.
+     */
+    public Button getBtnImport(){
+        return this.btnImport;
+    }
+    
+    public Button getBtnExport(){
+        return this.btnExport;
+    }
 }
