@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📦_20installazione_0',['📦 Installazione',['../index.html#autotoc_md8',1,'']]]
+  ['🚀_20descrizione_20del_20progetto_0',['🚀 Descrizione del Progetto',['../index.html#autotoc_md3',1,'']]]
 ];

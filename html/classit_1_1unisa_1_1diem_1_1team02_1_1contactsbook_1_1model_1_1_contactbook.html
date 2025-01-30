@@ -324,12 +324,17 @@ Membri pubblici</h2></td></tr>
 <p>Importa i contatti da un file e li aggiunge alla rubrica. </p>
 <p>Questo metodo permette all'utente di aggiungere dei contatti dal file passato come parametro. Ogni riga del file viene letta e i dati vengono utilizzati per creare nuovi oggetti <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html" title="Classe che modella un contatto.">Contact</a></code>, che vengono successivamente aggiunti alla rubrica. Il formato del file deve essere conforme alla struttura prevista, con i campi separati da punto e virgola.</p>
 <p>Il metodo apre un file passato come parametro, legge ogni riga e divide i dati nei rispettivi campi (nome, cognome, numeri di telefono, e-mail, tag). I contatti creati vengono aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, si verifica che questo non sia vuoto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>File nel quale sono salvati i contatti. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section pre"><dt>Precondizione</dt><dd>Il file passato come parametro deve essere un file valido. </dd></dl>
 <dl class="section post"><dt>Postcondizione</dt><dd>I contatti letti dal file vengono aggiunti alla rubrica.</dd></dl>
 <dl class="exception"><dt>Eccezioni</dt><dd>
   <table class="exception">
     <tr><td class="paramname">IOException</td><td>Se si verifica un errore durante la lettura del file. </td></tr>
-    <tr><td class="paramname">ClassNotFoundException</td><td>Se il tipo di dato non è trovato durante il caricamento dei dati. </td></tr>
   </table>
   </dd>
 </dl>
@@ -363,7 +368,6 @@ Membri pubblici</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Eccezioni</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">FileNotFoundException</td><td>Se il file non viene trovato. </td></tr>
     <tr><td class="paramname">IOException</td><td>Se si verifica un errore durante la scrittura nel file. </td></tr>
   </table>
   </dd>
