@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,7 +17,7 @@
             <URL value="@/styles/contactsbook.css" />
         </stylesheets>
     <items>
-    <AnchorPane fx:id="anchorUp" minHeight="50.0" maxHeight="50.0" prefHeight="50.0" minWidth="0.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+    <AnchorPane fx:id="anchorUp" maxHeight="50.0" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
     <children>
         <HBox fx:id="hboxButton" alignment="CENTER_LEFT" layoutX="1.0" layoutY="4.0" prefHeight="41.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -34,6 +35,7 @@
                 <Button fx:id="btnExport" mnemonicParsing="false" onAction="#actionExport" text="Export" />
                 <TextField fx:id="txtSearch" promptText="Search" />
                 <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#actionLogout" prefHeight="31.0" prefWidth="87.0" text="Logout" />
+                  <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" visible="false" />
             </children>
         </HBox>
     </children>
