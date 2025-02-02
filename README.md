@@ -53,5 +53,4 @@ Nel repository è presente l'intera documentazione redatta durante la progettazi
 - Analisi dei requisiti
 - Diagrammi UML (casi d'uso, diagrammi delle classi, sequenze, ecc.)
 - Piano di sviluppo
-- Manuale utente
-- Manuale di installazione e configurazione
+- Manuale tecnico in formato html
