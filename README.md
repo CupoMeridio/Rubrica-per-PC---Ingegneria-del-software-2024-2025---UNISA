@@ -47,7 +47,7 @@ Aprire il progetto in NetBeans 23. MAVEN gestirà automaticamente le dipendenze.
 ### **File eseguibile disponibile:**  
 Nel repository è disponibile la prima release del progetto. Per eseguire il file .jar è necessario scaricare ed installare l'ambiente Java. Puoi scaricarlo dal seguente link: [Java Downloads | Oracle](https://www.oracle.com/java/technologies/javase-downloads.html).  
 
-##📄 Documentazione
+## 📄 Documentazione
 Nel repository è presente l'intera documentazione redatta durante la progettazione e lo sviluppo del progetto. Questa include:
 
 - Analisi dei requisiti
