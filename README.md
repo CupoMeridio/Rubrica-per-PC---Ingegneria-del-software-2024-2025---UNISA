@@ -18,7 +18,8 @@ Questo progetto consiste nello sviluppo di un'applicazione desktop dedicata alla
 ## 🛠️ Tecnologie Utilizzate  
 - **Linguaggio di Programmazione:** Java  
 - **Database:** PostgreSQL  
-- **Framework e Librerie:** JavaFX  
+- **Framework e Librerie:** JavaFX, dotenv-java  
+- **Sicurezza:** BCrypt per hash delle password, dotenv per gestione credenziali  
 - **Strumenti di Versionamento:** Git/GitHub  
 - **Gestione del Progetto:** MAVEN  
 - **IDE Utilizzato:** NetBeans 23  
@@ -39,7 +40,27 @@ git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 ```  
 
 ### **Configurare il database:**  
-L'applicazione utilizza un database online tramite i servizi offerti da [Aiven](https://aiven.io), pertanto non è necessario configurare un database locale.  
+L'applicazione utilizza un database online tramite i servizi offerti da [Aiven](https://aiven.io), pertanto non è necessario configurare un database locale.
+
+### **Configurazione delle variabili d'ambiente:**  
+Per motivi di sicurezza, le credenziali del database sono gestite tramite variabili d'ambiente. Segui questi passaggi:
+
+1. **Copia il file di esempio:**  
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Modifica il file .env** con le tue credenziali del database:
+   ```
+   DB_HOST=your-database-host.com
+   DB_PORT=5432
+   DB_NAME=your-database-name
+   DB_USER=your-username
+   DB_PASSWORD=your-password
+   DB_SSL=require
+   ```
+
+3. **⚠️ IMPORTANTE:** Il file `.env` è già incluso nel `.gitignore` per evitare di caricare le credenziali su GitHub. Non rimuoverlo mai dal `.gitignore`.  
 
 ### **Compilare ed eseguire il progetto:**  
 Aprire il progetto in NetBeans 23. MAVEN gestirà automaticamente le dipendenze.  

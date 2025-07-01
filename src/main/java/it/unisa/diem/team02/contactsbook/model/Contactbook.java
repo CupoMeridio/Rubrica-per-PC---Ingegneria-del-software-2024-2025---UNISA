@@ -68,9 +68,6 @@ public class Contactbook {
     }
 
 
-    
-    
- 
     /**
      * @brief Aggiunge il contatto passato come parametro alla lista dei contatti.
      * 
@@ -114,12 +111,6 @@ public class Contactbook {
         return false;
     }
         
-    /**
-     * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
-     */
-    public void initializeList(){
-        
-    }
     
     /**
     * @brief Esporta la lista dei contatti della rubrica in un file.
@@ -207,7 +198,7 @@ public class Contactbook {
             if (br.readLine() == null) return;
             String line;
             while((line=br.readLine())!= null){
-                String campi []=line.split(";",-1);
+                String[] campi=line.split(";",-1);
                 Contact c=new Contact(campi[0], campi[1]);
                 try {
                     sleep(500); //diamo il tempo di generare un id univoco valido per il contatto

@@ -10,5 +10,6 @@ var searchData=
   ['addviewcontroller_7',['AddViewController',['../classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_add_view_controller.html',1,'it::unisa::diem::team02::contactsbook::ui::controllers']]],
   ['addviewcontroller_2ejava_8',['AddViewController.java',['../_add_view_controller_8java.html',1,'']]],
   ['app_9',['App',['../classit_1_1unisa_1_1diem_1_1team02_1_1_app.html',1,'it::unisa::diem::team02']]],
-  ['app_2ejava_10',['App.java',['../_app_8java.html',1,'']]]
+  ['app_2ejava_10',['App.java',['../_app_8java.html',1,'']]],
+  ['aprire_20il_20programma_11',['Comando per aprire il programma',['../index.html#autotoc_md9',1,'']]]
 ];
