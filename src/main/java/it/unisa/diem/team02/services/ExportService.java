@@ -7,6 +7,7 @@ import java.io.IOException;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
+import it.unisa.diem.team02.contactsbook.ui.utils.AlertUtils;
 import javafx.scene.control.ProgressBar;
 
 /**
@@ -48,12 +49,7 @@ public class ExportService extends Service<Void> {
                     // Salva i contatti nel file selezionato
                     contactbook.saveOnFile(selectedFile);
                 } catch (IOException ex) {
-                    ex.printStackTrace(); // Aggiungi questa linea per visualizzare l'errore nel log
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("");
-                    alert.setContentText("An error occurred during the export. No contact has been exported.");
-                    alert.showAndWait();
+                    AlertUtils.showError("Error", "An error occurred during the export. No contact has been exported.");
                 }
                 return null;
             }
@@ -71,7 +67,7 @@ public class ExportService extends Service<Void> {
         progressBar.progressProperty().unbind();
         progressBar.setProgress(1);
         contactsbookViewController.getBtnExport().setDisable(false);
-        showAlert("Operation completed", "File export was successfully completed.", Alert.AlertType.INFORMATION);
+        AlertUtils.showInfo("Operation completed", "File export was successfully completed.");
     }
 
     /**
@@ -85,24 +81,8 @@ public class ExportService extends Service<Void> {
         progressBar.progressProperty().unbind();
         progressBar.setProgress(0);
         contactsbookViewController.getBtnExport().setDisable(false);
-        showAlert("Error", "An error occurred during the export. No contact has been exported.", Alert.AlertType.ERROR);
+        AlertUtils.showError("Error", "An error occurred during the export. No contact has been exported.");
     }
 
-    /**
-     * Mostra un'alert con il messaggio specificato.
-     * 
-     * @param title Il titolo della finestra di dialogo.
-     * @param message Il messaggio da visualizzare.
-     * @param type Il tipo di alert.
-     * 
-     * @pre title e message non devono essere null.
-     * @post Viene mostrato un messaggio di alert all'utente.
-     */
-    private void showAlert(String title, String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

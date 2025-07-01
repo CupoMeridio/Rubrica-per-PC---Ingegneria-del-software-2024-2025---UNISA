@@ -40,11 +40,11 @@ public class DatabaseTest {
     @org.junit.jupiter.api.BeforeAll
     public static void setUp() throws Exception {
         db= new Database();
-        conn=db.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+        conn=db.ConnectionDB(); // Usa il nuovo metodo con variabili d'ambiente
         email_utente ="valeriaquaranta2003@gmail.com";
         password_utente="password";
         
-        System.out.print("\n nel metodo statico  "+ email_utente+"  "+password_utente);
+        // Debug: nel metodo statico email e password utente
         cont= new Contact("Vittorio","Postiglione");
         ArrayList<String> number = new ArrayList<>();
         ArrayList<String> em= new ArrayList<>();
@@ -67,14 +67,14 @@ public class DatabaseTest {
 
     @org.junit.jupiter.api.AfterAll
     public static void tearDown() throws Exception {
-        conn=db.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+        conn=db.ConnectionDB(); // Usa il nuovo metodo con variabili d'ambiente
         try {
             Statement statment;
             String table= "utenti";
             String query= String.format("delete from %s where email='%s'",table, email_utente);
             statment= conn.createStatement();
             statment.execute(query);
-            System.out.print("\n Utente eliminato");
+            // Debug: Utente eliminato
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,12 +85,9 @@ public class DatabaseTest {
      */
     @org.junit.jupiter.api.Test
     public void testConnectionDB() {
-        System.out.println("ConnectionDB");
-        String dbname = "rubrica";
-        String user = "avnadmin";
-        String password = "AVNS_rgkdmIqyKlbMdHqenly";
+        // Test ConnectionDB
         Database instance = new Database();
-        Connection result = instance.ConnectionDB(dbname, user, password);
+        Connection result = instance.ConnectionDB(); // Usa il nuovo metodo con variabili d'ambiente
         assertNotNull(result);
     }
 
@@ -100,14 +97,14 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(1)
     public void testInsertUtente() throws Exception {
-        System.out.println("insertUtente (con utente non presente nel database)");
+        // Test insertUtente (con utente non presente nel database)
         String tableName = "utenti";
         db.insertUser(conn, tableName, email_utente, password_utente);
     }
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(2)
     public void testInsertUtente2() throws Exception {
-        System.out.println("insertUtente 2 (con utente presente nel database)");
+        // Test insertUtente 2 (con utente presente nel database)
         String tableName = "utenti";
         Database instance = new Database();
         assertThrows(SQLException.class, () -> { 
@@ -121,7 +118,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(3)
     public void testGetUser() {
-        System.out.println("getUtenti");
+        // Test getUtenti
         String tableName = "utenti";
         HashMap<String, String> expect= new HashMap<>();
         expect.put(email_utente, password_utente);
@@ -138,7 +135,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(4)
     public void testCheckLogin() throws Exception {
-        System.out.println("checkLogin");
+        // Test checkLogin
         String tableName = "utenti";
         int expResult = 1;
         int result = db.checkLogin(conn, tableName, email_utente, password_utente);
@@ -146,7 +143,7 @@ public class DatabaseTest {
     }
     @org.junit.jupiter.api.Order(5)
     public void testCheckLogin2() throws Exception {
-        System.out.println("checkLogin2");
+        // Test checkLogin2
         String tableName = "utenti";
         String password = "";
         int expResult = 0;
@@ -155,7 +152,7 @@ public class DatabaseTest {
     }
     @org.junit.jupiter.api.Order(6)
      public void testCheckLogin3() throws Exception {
-        System.out.println("checkLogin3");
+        // Test checkLogin3
         String tableName = "utenti";
         String email = " ";
         int expResult = -1;
@@ -168,7 +165,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(7)
     public void testInsertContact() throws Exception {
-        System.out.println("insertContatto");
+        // Test insertContatto
         String tableName = "contatti";
         db.insertContact(conn, tableName, cont, email_utente);
     }
@@ -178,7 +175,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(8)
     public void testGetContact() {
-        System.out.println("getContact");
+        // Test getContact
         String tableName = "contatti";
         
         ArrayList<Contact> result = db.getContact(conn, tableName, email_utente); // CAMBIATO PER TREESET
@@ -194,7 +191,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(9)
     public void testModifyContact() throws Exception {
-        System.out.println("modifyContact");
+        // Test modifyContact
         String tableName = "contatti";
         ArrayList<String> number = new ArrayList<>();
         number.add("0815095344");
@@ -217,7 +214,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(10)
     public void testRemuveContactByID() throws Exception {
-        System.out.println("remuveContactByID");
+        // Test remuveContactByID
         String tableName = "contatti";
         db.removeContactByID(conn, tableName, cont.getID(), email_utente);
         //Map <String,Contact>table=  new HashMap();
@@ -231,7 +228,7 @@ public class DatabaseTest {
     @org.junit.jupiter.api.Test
     @org.junit.jupiter.api.Order(11)
     public void testCloseConnection() throws Exception {
-        System.out.println("CloseConnection");
+        // Test CloseConnection
         db.CloseConnection();
     }
 

@@ -8,6 +8,7 @@ import java.io.File;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
+import it.unisa.diem.team02.contactsbook.ui.utils.AlertUtils;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -97,7 +98,7 @@ public class ImportService extends Service<Void> {
         progressBar.progressProperty().unbind();
         progressBar.setProgress(1);
         contactsbookViewController.getBtnImport().setDisable(false);
-        showAlert("Operation completed", "File import was successfully completed.", Alert.AlertType.INFORMATION);
+        AlertUtils.showInfo("Operation completed", "File import was successfully completed.");
     }
 
     /**
@@ -111,24 +112,8 @@ public class ImportService extends Service<Void> {
         progressBar.progressProperty().unbind();
         progressBar.setProgress(0);
         contactsbookViewController.getBtnImport().setDisable(false);
-        showAlert("Error", "An error occurred during the import. No contact has been imported.", Alert.AlertType.ERROR);
+        AlertUtils.showError("Error", "An error occurred during the import. No contact has been imported.");
     }
 
-    /**
-     * Mostra un'alert con il messaggio specificato.
-     * 
-     * @param title Il titolo della finestra di dialogo.
-     * @param message Il messaggio da visualizzare.
-     * @param type Il tipo di alert.
-     * 
-     * @pre title e message non devono essere null.
-     * @post Viene mostrato un messaggio di alert all'utente.
-     */
-    private void showAlert(String title, String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

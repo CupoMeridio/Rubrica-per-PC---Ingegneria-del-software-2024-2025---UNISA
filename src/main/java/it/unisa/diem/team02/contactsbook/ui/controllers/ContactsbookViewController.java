@@ -13,8 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import it.unisa.diem.team02.contactsbook.ui.utils.AlertUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,8 +24,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
@@ -164,15 +161,12 @@ public class ContactsbookViewController implements Initializable {
 
     public void tblvContactsInizialize(){
 
-        System.out.println("Sto recuperando i contatti");
         Database database = new Database();
         ArrayList<Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
-        System.out.println("Lista 1:"+listaContatti);
         Collections.sort(listaContatti);
         for (Contact c : listaContatti){
             contactbook.add(c);    
         }
-        System.out.println("Lista 2:"+listaContatti);
     }
     
 /**
@@ -474,7 +468,7 @@ public class ContactsbookViewController implements Initializable {
         try{
             App.setRoot("LoginView");} 
         catch (IOException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);}
+            AlertUtils.showError("Errore", "Impossibile caricare la schermata di login.");}
     }
     
     
